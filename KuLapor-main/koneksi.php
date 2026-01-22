@@ -1,6 +1,8 @@
 <?php
+// perintah untuk membuat koneksi
+$koneksi = mysqli_connect("localhost","root","","ujikom_12rpl_haikan");
 
-    $koneksi = mysqli_connect("localhost","root","","ujikom_12rpl_haikan");
-    echo "Berhasil";
-
+if(!$koneksi){
+    die("Koneksi Gagal");
+}
 ?>
