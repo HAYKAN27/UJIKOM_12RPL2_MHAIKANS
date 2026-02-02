@@ -166,12 +166,7 @@
             <label for="password">Password:</label>
             <input type="password" id="password" name="password" placeholder="ketikkan password anda">
         </div>
-        
-        <div class="remember-me">
-            <input type="checkbox" id="remember">
-            <label for="remember">Remember me</label>
-        </div>
-        
+    
         <button class="login-button">LOGIN</button>
         
         <div class="separator"></div>

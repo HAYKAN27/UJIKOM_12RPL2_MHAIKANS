@@ -51,7 +51,7 @@
             font-size: 14px;
         }
 
-        input[type="text"] {
+        input {
             width: 100%;
             padding: 12px 15px;
             border: 2px solid #e0e0e0;
@@ -163,6 +163,11 @@
             <div class="form-group">
                 <label for="nama">Nama Lengkap</label>
                 <input type="text" id="nama" name="nama" placeholder="Masukkan nama lengkap" required>
+            </div>
+
+            <div class="form-group">
+                <label for="nama">password</label>
+                <input type="password" id="password" name="password" placeholder="Masukan password" required>
             </div>
             <div class="form-group">
                 <label for="kelas">Kelas</label>

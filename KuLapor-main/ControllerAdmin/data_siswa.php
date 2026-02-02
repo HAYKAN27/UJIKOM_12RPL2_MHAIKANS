@@ -1,5 +1,5 @@
 <?php
-include  '../koneksi.php';
+include  '../config/koneksi.php';
 
 $nis      = $_POST['nis'];
 $username = $_POST['nama'];
@@ -16,6 +16,9 @@ $query = mysqli_query($koneksi, $insert);
 
 if ($query) {
     echo "berhasil";
+}
+else{
+    echo"gagal";
 }   
 
 ?>
