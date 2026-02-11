@@ -1,92 +1,80 @@
 <?php
 session_start();
-include '../../ControllerSiswa/data_anda.php';
+include '../../config/koneksi.php';
+
+// ambil nis dari session
+$nis = $_SESSION['nis'];
+
+// ambil semua laporan milik siswa
+$query = mysqli_query($koneksi, "SELECT * FROM input_aspirasi WHERE nis='$nis' ORDER BY id_pelapor DESC");
 ?>
 
 <!DOCTYPE html>
-<html lang="id">
-
+<html>
 <head>
-    <meta charset="UTF-8">
-    <title>Laporan Saya</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <title>Riwayat Laporan</title>
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        table, th, td {
+            border: 1px solid #999;
+        }
+        th, td {
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #eee;
+        }
+        a.detail-btn {
+            padding: 4px 8px;
+            background-color: #2e86de;
+            color: white;
+            text-decoration: none;
+            border-radius: 4px;
+        }
+        a.detail-btn:hover {
+            background-color: #1b4f72;
+        }
+    </style>
 </head>
-
-<style>
-    body {
-        background: #f5f5f5;
-    }
-
-    .container-main {
-        background: white;
-        padding: 30px;
-        border-radius: 10px;
-        margin-top: 30px;
-        box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-    }
-
-    .status-badge {
-        padding: 6px 12px;
-        border-radius: 6px;
-        font-size: 12px;
-        font-weight: bold;
-    }
-
-    .pending { background: #ffc107; }
-    .ditanggapi { background: #28a745; color: white; }
-    .selesai { background: #0d6efd; color: white; }
-</style>
-
 <body>
 
-<div class="container container-main">
+<h2>Riwayat Laporan Saya</h2>
 
-    <h3 class="mb-4">Data Laporan Saya</h3>
-
-    <table class="table table-bordered table-hover">
-        <thead class="table-dark">
-            <tr>
-                <th>No</th>
-                <th>Tanggal</th>
-                <th>NIS</th>
-                <th>Kategori</th>
-                <th>Lokasi</th>
-                <th>Keterangan</th>
-                <th>Status</th>
-                <th>Detail</th>
-            </tr>
-        </thead>
-        <tbody>
-
-        <?php if (!empty($data)) : ?>
-            <?php $no = 1; foreach ($data as $row) : ?>
-                <?php
-                    $status_class = strtolower($row['status']);
-                ?>
-                <tr>
-                    <td><?= $no++ ?></td>
-                    <td><?= $row['tanggal'] ?></td>
-                    <td><?= $row['ket_kategori'] ?></td>
-                    <td><?= $row['isi_laporan'] ?></td>
-                    <td>
-                        <span class="status-badge <?= $status_class ?>">
-                            <?= ucfirst($row['status']) ?>
-                        </span>
-                    </td>
-                </tr>
-            <?php endforeach; ?>
-        <?php else : ?>
-            <tr>
-                <td colspan="5" class="text-center text-muted">
-                    Belum ada laporan
-                </td>
-            </tr>
-        <?php endif; ?>
-
-        </tbody>
-    </table>
-
-</div>
+<table>
+    <thead>
+        <tr>
+            <th>No</th>
+            <th>Tanggal</th>
+            <th>NIS</th>
+            <th>Kategori</th>
+            <th>Lokasi</th>
+            <th>Keterangan</th>
+            <th>Status</th>
+            <th>Detail</th>
+        </tr>
+    </thead>
+    <tbody>
+        <?php
+        $no = 1;
+        while ($data = mysqli_fetch_assoc($query)) {
+            echo "<tr>";
+            echo "<td>" . $no++ . "</td>";
+            echo "<td>" . htmlspecialchars($data['lokasi']) . "</td>";
+            echo "<td>" . htmlspecialchars($data['nis']) . "</td>";
+            echo "<td>" . htmlspecialchars($data['id_kategori']) . "</td>";
+            echo "<td>" . htmlspecialchars($data['lokasi']) . "</td>";
+            echo "<td>" . htmlspecialchars($data['ket']) . "</td>";
+            echo "<td>" . htmlspecialchars($data['status']) . "</td>";
+            echo "<td><a class='detail-btn' href='detail_laporan.php?id=" . $data['id_pelapor'] . "'>Detail</a></td>";
+            echo "</tr>";
+        }
+        ?>
+    </tbody>
+</table>
 
 </body>
 </html>

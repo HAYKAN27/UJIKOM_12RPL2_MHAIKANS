@@ -153,8 +153,7 @@
     <div class="container">
         <h2>Form Data Siswa</h2>
         <form action="../../ControllerAdmin/data_siswa.php" method="post">
-
-
+            
             <div class="form-group">
                 <label for="nis">NIS (Nomor Induk Siswa)</label>
                 <input type="text" id="nis" name="nis" placeholder="Masukkan NIS" required>

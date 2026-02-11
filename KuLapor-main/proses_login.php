@@ -10,9 +10,9 @@ $query = mysqli_query($koneksi, "SELECT * FROM user WHERE username='$username' A
 $data  = mysqli_fetch_assoc($query);
 
 if ($data) {
-    
-    $_SESSION['nis'] = $data['nis'];
-    $_SESSION['username'] = $data['username'];
+    $_SESSION['id']       = $data['id'];     
+    $_SESSION['nis']      = $data['nis'];
+    $_SESSION['username'] = $data['Username'];
     $_SESSION['role']     = $data['role'];
 
     // redirect berdasarkan role
@@ -22,8 +22,6 @@ if ($data) {
         header("Location: views/siswa/homepage.php");
     }
     exit;
-
 } else {
     echo "Username atau password salah!";
 }
-?>

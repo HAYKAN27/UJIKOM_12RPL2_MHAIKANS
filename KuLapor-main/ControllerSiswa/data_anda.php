@@ -1,26 +1,21 @@
 <?php
-include __DIR__ . '/../config/koneksi.php';
+session_start();
+include '../config/koneksi.php';
 
-$data = [];
+// ambil nis dari session
+$nis = $_SESSION['nis'];
 
-if (isset($_SESSION['id_user'])) {
+$query = mysqli_query($koneksi, "
+    SELECT * FROM input_aspirasi 
+    WHERE nis = '$nis'
+    ORDER BY id_pelapor DESC
+");
 
-    $id_user = $_SESSION['id_user'];
-
-    $query = mysqli_query($koneksi, "
-        SELECT 
-            p.id_pengaduan,
-            p.isi_laporan,
-            p.tanggal,
-            p.status,
-            k.ket_kategori
-        FROM pengaduan p
-        JOIN kategori k ON p.id_kategori = k.id_kategori
-        WHERE p.id_user = '$id_user'
-        ORDER BY p.id_pengaduan DESC
-    ");
-
-    while ($row = mysqli_fetch_assoc($query)) {
-        $data[] = $row;
-    }
+while ($data = mysqli_fetch_assoc($query)) {
+    echo "<b>Lokasi:</b> " . $data['lokasi'] . "<br>";
+    echo "<b>Kategori:</b> " . $data['id_kategori'] . "<br>";
+    echo "<b>Keterangan:</b> " . $data['ket'] . "<br>";
+    echo "<b>Status:</b> " . $data['status'] . "<br>";
+    echo "<b>Feedback:</b> " . $data['feedback'] . "<hr>";
 }
+?>

@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="id">
 <head>
@@ -204,9 +205,12 @@
             <button class="btn-logout"><a href="homepage.php"></a>Logout</button>
         </div>
         <div class="header-right">
+            <!-- <?php 
+                $nis = $_SESSION['nis'];            
+            ?>
             <?php 
                 echo"HI Haikan";
-            ?>
+            ?> -->
         </div>
     </div>
 

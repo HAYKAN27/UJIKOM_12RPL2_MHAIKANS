@@ -135,11 +135,11 @@ $nis = $_SESSION['nis'];
 
             <div class="form-group">
                 <label for="kategori">Kategori</label>
-                <select id="kategori" name="kategori">
+                <select id="id_kategori" name="id_kategori">
                     <option value="">Pilih Kategori</option>
-                    <option value="fasilitas">Fasilitas Kelas</option>
-                    <option value="kebersihan">Kebersihan</option>
-                    <option value="kantin">Kantin</option>
+                    <option value="1">Elektronik</option>
+                    <option value="2">Kebersihan</option>
+                    <option value="3">Fasilitas kelas</option>
                 </select>
                 <small class="helper-text">Fasilitas kelas, kebersihan, kantin</small>
             </div>
@@ -154,7 +154,7 @@ $nis = $_SESSION['nis'];
                 <textarea id="keterangan" name="keterangan" placeholder="Jelaskan pengaduan Anda secara detail..."></textarea>
             </div>
 
-            <button type="submit">Kirim</button>
+            <button type="submit" name="kirim">Kirim</button>
         </form>
     </div>
 </body>

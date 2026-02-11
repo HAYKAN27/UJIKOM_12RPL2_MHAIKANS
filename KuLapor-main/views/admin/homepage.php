@@ -225,10 +225,10 @@ session_start();
             </div>
 
             <div class="menu-item">
-                <a href="#" class="menu-button">MANAJEMEN DATA SISWA</a>
+                <a href="data_siswa.php" class="menu-button">MANAJEMEN DATA SISWA</a>
             </div>
             <div class="menu-item">
-                <a href="#" class="menu-button">MEMBUAT AKUN </a>
+                <a href="form_add_siswa.php" class="menu-button">MEMBUAT AKUN </a>
             </div>
         </div>
 

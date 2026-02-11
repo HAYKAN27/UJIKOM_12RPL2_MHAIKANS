@@ -17,7 +17,9 @@ if (!$nis) {
 $query = "SELECT * FROM pengaduan WHERE nis = '$nis' ORDER BY tanggal DESC";
 $result = mysqli_query($koneksi, $query);
 
+
 $data_pengaduan = [];
+
 
 if (mysqli_num_rows($result) > 0) {
     while ($row = mysqli_fetch_assoc($result)) {
