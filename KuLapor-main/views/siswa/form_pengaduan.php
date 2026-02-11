@@ -1,5 +1,16 @@
+<?php
+session_start();
+
+if (!isset($_SESSION['nis'])) {
+    header("Location: /login.php");
+    exit;
+}
+
+$nis = $_SESSION['nis'];
+?>
 <!DOCTYPE html>
 <html lang="id">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -109,13 +120,16 @@
         }
     </style>
 </head>
+
 <body>
+
     <div class="container">
         <h1>Halaman Pengaduan</h1>
         <form>
             <div class="form-group">
-                <label for="nis">NIS</label>
-                <input type="text" id="nis" name="nis" placeholder="Masukkan NIS Anda">
+                <label>NIS</label>
+                <input type="text" value="<?= $nis ?>" readonly>
+                <input type="hidden" name="nis" value="<?= $nis ?>">
             </div>
 
             <div class="form-group">
@@ -125,7 +139,6 @@
                     <option value="fasilitas">Fasilitas Kelas</option>
                     <option value="kebersihan">Kebersihan</option>
                     <option value="kantin">Kantin</option>
-                    <option value="lainnya">Lainnya</option>
                 </select>
                 <small class="helper-text">Fasilitas kelas, kebersihan, kantin</small>
             </div>
@@ -144,4 +157,5 @@
         </form>
     </div>
 </body>
+
 </html>

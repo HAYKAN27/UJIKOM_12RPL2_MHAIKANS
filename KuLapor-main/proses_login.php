@@ -5,12 +5,11 @@ include 'config/koneksi.php';
 $username = $_POST['username'];
 $password = $_POST['password'];
 
-// ambil data user berdasarkan username
-$query = mysqli_query($koneksi, "SELECT * FROM user WHERE username='$username'");
+// ambil data user berdasarkan username dan password
+$query = mysqli_query($koneksi, "SELECT * FROM user WHERE username='$username' AND password='$password'");
 $data  = mysqli_fetch_assoc($query);
 
-// cek user & password bcrypt
-if ($data && password_verify($password, $data['password'])) {
+if ($data) {
 
     $_SESSION['username'] = $data['username'];
     $_SESSION['role']     = $data['role'];
@@ -21,7 +20,6 @@ if ($data && password_verify($password, $data['password'])) {
     } elseif ($data['role'] == 'siswa') {
         header("Location: views/siswa/homepage.php");
     }
-
     exit;
 
 } else {

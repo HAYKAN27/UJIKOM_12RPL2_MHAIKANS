@@ -1,25 +1,245 @@
-<!DOCTYPE html>
-<html lang="en">
 
+
+<?php
+session_start();
+?>
+
+<!DOCTYPE html>
+<html lang="id">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
+    <title>KULAPOR - Homepage User</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #f5f5f5;
+            min-height: 100vh;
+        }
+
+        .header {
+            background: white;
+            padding: 20px 40px;
+            border-bottom: 2px solid #e0e0e0;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .header-left {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .logo {
+            width: 50px;
+            height: 50px;
+            background: #1e40af;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            font-size: 18px;
+        }
+
+        .btn-logout {
+            padding: 12px 30px;
+            font-size: 16px;
+            font-weight: 600;
+            border: 3px solid #000;
+            border-radius: 10px;
+            background: white;
+            color: #000;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .btn-logout:hover {
+            background: #f5f5f5;
+            transform: scale(1.05);
+        }
+
+        .header-right {
+            font-size: 24px;
+            font-weight: 600;
+            color: #000;
+        }
+
+        .main-content {
+            background: white;
+            min-height: calc(100vh - 90px);
+            padding: 60px 40px;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            gap: 80px;
+        }
+
+        .menu-section {
+            flex: 1;
+            max-width: 400px;
+        }
+
+        .menu-item {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .menu-number {
+            font-size: 48px;
+            font-weight: 700;
+            color: #000;
+            min-width: 60px;
+        }
+
+        .menu-button {
+            padding: 15px 35px;
+            font-size: 18px;
+            font-weight: 600;
+            border: 3px solid #000;
+            border-radius: 10px;
+            background: white;
+            color: #000;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+            text-align: center;
+            flex: 1;
+        }
+
+        .menu-button:hover {
+            background: #000;
+            color: white;
+            transform: translateX(10px);
+        }
+
+        .illustration-section {
+            flex: 1;
+            max-width: 450px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .illustration-section img {
+            width: 100%;
+            max-width: 350px;
+            height: auto;
+            filter: drop-shadow(0 10px 30px rgba(0, 0, 0, 0.1));
+        }
+
+        /* Ilustrasi placeholder jika tidak ada gambar */
+        .illustration-placeholder {
+            width: 350px;
+            height: 350px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 24px;
+            font-weight: 600;
+            box-shadow: 0 10px 40px rgba(102, 126, 234, 0.3);
+        }
+
+        @media (max-width: 968px) {
+            .main-content {
+                flex-direction: column;
+                gap: 50px;
+                padding: 40px 30px;
+            }
+
+            .menu-section {
+                width: 100%;
+                max-width: 500px;
+            }
+
+            .illustration-section {
+                width: 100%;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .header {
+                padding: 15px 20px;
+                flex-wrap: wrap;
+                gap: 15px;
+            }
+
+            .header-right {
+                font-size: 20px;
+                width: 100%;
+                text-align: center;
+                order: 3;
+            }
+
+            .menu-number {
+                font-size: 36px;
+                min-width: 50px;
+            }
+
+            .menu-button {
+                font-size: 16px;
+                padding: 12px 25px;
+            }
+
+            .illustration-placeholder {
+                width: 280px;
+                height: 280px;
+            }
+        }
+    </style>
 </head>
-
 <body>
-    <nav>   
-        <h1>Welcome admin </h1>
-            
-    </nav>
-    <main>
+    <div class="header">
+        <div class="header-left">
+            <div class="logo"></div>
+            <button class="btn-logout">Logout</button>
+        </div>
+        <div class="header-right">
+            Hi! Admin
+        </div>
+    </div>
 
-    </main>
-    <footer>
+    <div class="main-content">
+        <div class="menu-section">
+            <div class="menu-item">
+                <a href="#" class="menu-button">MANAJEMEN KATEGORI</a>
+            </div>
 
-    </footer>
+            <div class="menu-item">
+                <a href="data_pengaduan.php" class="menu-button">DAFTAR PENGADUAN</a>
+            </div>
+
+            <div class="menu-item">
+                <a href="#" class="menu-button">MANAJEMEN DATA SISWA</a>
+            </div>
+            <div class="menu-item">
+                <a href="#" class="menu-button">MEMBUAT AKUN </a>
+            </div>
+        </div>
+
+        <div class="illustration-section">
+            <!-- Ganti dengan ilustrasi Anda -->
+            <div class="">
+              
+            </div>
+            <!-- Atau gunakan img jika punya file gambar -->
+            <!-- <img src="ilustrasi.png" alt="Dashboard Illustration"> -->
+        </div>
+    </div>
 </body>
-
 </html>
