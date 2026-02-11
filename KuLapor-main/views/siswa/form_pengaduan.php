@@ -2,7 +2,7 @@
 session_start();
 
 if (!isset($_SESSION['nis'])) {
-    header("Location: /login.php");
+    header("Location: /PROJECT-UJIKOM/Kulapor-main/login.php");
     exit;
 }
 
@@ -125,7 +125,8 @@ $nis = $_SESSION['nis'];
 
     <div class="container">
         <h1>Halaman Pengaduan</h1>
-        <form>
+        <form action="../../ControllerSiswa/proses_pengaduan.php" method="POST">
+
             <div class="form-group">
                 <label>NIS</label>
                 <input type="text" value="<?= $nis ?>" readonly>

@@ -48,9 +48,12 @@ include '../../ControllerSiswa/data_anda.php';
             <tr>
                 <th>No</th>
                 <th>Tanggal</th>
+                <th>NIS</th>
                 <th>Kategori</th>
-                <th>Isi Laporan</th>
+                <th>Lokasi</th>
+                <th>Keterangan</th>
                 <th>Status</th>
+                <th>Detail</th>
             </tr>
         </thead>
         <tbody>

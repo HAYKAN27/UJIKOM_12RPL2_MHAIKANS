@@ -10,7 +10,8 @@ $query = mysqli_query($koneksi, "SELECT * FROM user WHERE username='$username' A
 $data  = mysqli_fetch_assoc($query);
 
 if ($data) {
-
+    
+    $_SESSION['nis'] = $data['nis'];
     $_SESSION['username'] = $data['username'];
     $_SESSION['role']     = $data['role'];
 
