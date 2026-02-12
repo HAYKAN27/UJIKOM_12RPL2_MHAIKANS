@@ -48,7 +48,6 @@ $query = mysqli_query($koneksi, "SELECT * FROM input_aspirasi WHERE nis='$nis' O
     <thead>
         <tr>
             <th>No</th>
-            <th>Tanggal</th>
             <th>NIS</th>
             <th>Kategori</th>
             <th>Lokasi</th>
@@ -63,12 +62,12 @@ $query = mysqli_query($koneksi, "SELECT * FROM input_aspirasi WHERE nis='$nis' O
         while ($data = mysqli_fetch_assoc($query)) {
             echo "<tr>";
             echo "<td>" . $no++ . "</td>";
-            echo "<td>" . htmlspecialchars($data['lokasi']) . "</td>";
-            echo "<td>" . htmlspecialchars($data['nis']) . "</td>";
-            echo "<td>" . htmlspecialchars($data['id_kategori']) . "</td>";
-            echo "<td>" . htmlspecialchars($data['lokasi']) . "</td>";
-            echo "<td>" . htmlspecialchars($data['ket']) . "</td>";
-            echo "<td>" . htmlspecialchars($data['status']) . "</td>";
+            // echo "<td>" . $data['Username'] . "</td>"; // pastikan ada field tanggal
+            echo "<td>" . $data['nis'] . "</td>";
+            echo "<td>" . $data['id_kategori'] . "</td>";
+            echo "<td>" . $data['lokasi'] . "</td>";
+            echo "<td>" . $data['ket'] . "</td>";
+            echo "<td>" . $data['status'] . "</td>";
             echo "<td><a class='detail-btn' href='detail_laporan.php?id=" . $data['id_pelapor'] . "'>Detail</a></td>";
             echo "</tr>";
         }

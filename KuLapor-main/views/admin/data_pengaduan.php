@@ -7,6 +7,35 @@
     <title>Data Pengaduan</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+
+    <!-- DataTables CSS -->
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.8/css/jquery.dataTables.min.css">
+
+    <!-- DataTables JS -->
+    <script src="https://cdn.datatables.net/1.13.8/js/jquery.dataTables.min.js"></script>
+
+
+    <script>
+        $(document).ready(function() {
+            $('#datatable').DataTable({
+                "language": {
+                    "search": "Cari:",
+                    "lengthMenu": "Tampilkan _MENU_ data",
+                    "info": "Menampilkan _START_ sampai _END_ dari _TOTAL_ data",
+                    "paginate": {
+                        "next": "Selanjutnya",
+                        "previous": "Sebelumnya"
+                    },
+                    "zeroRecords": "Data tidak ditemukan",
+                    "infoEmpty": "Tidak ada data tersedia"
+                }
+            });
+        });
+    </script>
+
     <style>
         body {
             background-color: #f5f5f5;
@@ -68,7 +97,8 @@
         <h1>Data Pengaduan</h1>
 
         <div class="table-responsive ">
-            <table class="table table-striped table-hover">
+            <table id="datatable" class="table table-striped table-hover">
+
                 <thead>
                     <tr>
                         <th>No</th>
@@ -105,8 +135,29 @@
                             echo "<td>" . $row['ket_kategori'] . "</td>";
                             echo "<td><span class='status-badge " . $status_class . "'>" . ucfirst($row['status']) . "</span></td>";
                             echo "<td>";
-                            echo "<a href='#' class='btn btn-sm btn-info'>Lihat</a> ";
-                            echo "<a href='#' class='btn btn-sm btn-warning'>Edit</a>";
+                            echo "<button 
+                            class='btn btn-sm btn-info btn-detail'
+                            data-bs-toggle='modal'
+                            data-bs-target='#detailModal'
+                            data-id='" . $row['id_pelapor'] . "'
+                            data-nis='" . $row['nis'] . "'
+                            data-nama='" . $row['username'] . "'
+                            data-kategori='" . $row['ket_kategori'] . "'
+                            data-lokasi='" . $row['lokasi'] . "'
+                            data-ket='" . $row['ket'] . "'
+                            data-status='" . $row['status'] . "'
+                            data-feedback='" . $row['feedback'] . "'
+                        >Lihat</button> ";
+
+                            echo "<button 
+                            class='btn btn-sm btn-warning btn-edit'
+                            data-bs-toggle='modal'
+                            data-bs-target='#editModal'
+                            data-id='" . $row['id_pelapor'] . "'
+                            data-status='" . $row['status'] . "'
+                            data-feedback='" . $row['feedback'] . "'
+                        >Edit</button>";
+
                             echo "</td>";
                             echo "</tr>";
                             $no++;
@@ -116,9 +167,86 @@
                     }
                     ?>
                 </tbody>
+
+
             </table>
+
+            <!-- Modal Detail -->
+            <div class="modal fade" id="detailModal" tabindex="-1">
+                <div class="modal-dialog modal-lg modal-dialog-centered">
+                    <div class="modal-content">
+
+                        <div class="modal-header">
+                            <h5 class="modal-title">Detail Pengaduan</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                        </div>
+
+                        <div class="modal-body">
+                            <div class="row mb-2">
+                                <div class="col-md-6"><strong>NIS :</strong> <span id="detailNis"></span></div>
+                                <div class="col-md-6"><strong>Kategori :</strong> <span id="detailKategori"></span></div>
+                            </div>
+
+                            <div class="row mb-2">
+                                <div class="col-md-6"><strong>Lokasi :</strong> <span id="detailLokasi"></span></div>
+                                <div class="col-md-6"><strong>Tanggal :</strong> <span id="detailTanggal"></span></div>
+                            </div>
+
+                            <div class="row mb-2">
+                                <div class="col-md-6"><strong>Kode Pengaduan :</strong> <span id="detailKode"></span></div>
+                                <div class="col-md-6"><strong>Status :</strong> <span id="detailStatus"></span></div>
+                            </div>
+
+                            <div class="mb-3">
+                                <strong>Keterangan :</strong>
+                                <div class="border rounded p-3 mt-1 bg-light">
+                                    <span id="detailKeterangan"></span>
+                                </div>
+                            </div>
+
+                            <div class="mb-3">
+                                <strong>Pesan Admin :</strong>
+                                <div class="border rounded p-3 mt-1 bg-light">
+                                    <span id="detailPesan"></span>
+                                </div>
+                            </div>
+
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
         </div>
     </div>
 </body>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+
+        // DETAIL
+        document.querySelectorAll(".btn-detail").forEach(button => {
+            button.addEventListener("click", function() {
+
+                document.getElementById("detailNis").innerText = this.dataset.nis;
+                document.getElementById("detailKategori").innerText = this.dataset.kategori;
+                document.getElementById("detailLokasi").innerText = this.dataset.lokasi;
+                document.getElementById("detailStatus").innerText = this.dataset.status;
+                document.getElementById("detailKeterangan").innerText = this.dataset.ket;
+                document.getElementById("detailPesan").innerText = this.dataset.feedback ?? "-";
+            });
+        });
+
+        // EDIT
+        document.querySelectorAll(".btn-edit").forEach(button => {
+            button.addEventListener("click", function() {
+
+                document.getElementById("editId").value = this.dataset.id;
+                document.getElementById("editStatus").value = this.dataset.status;
+                document.getElementById("editFeedback").value = this.dataset.feedback ?? "";
+            });
+        });
+
+    });
+</script>
 
 </html>
