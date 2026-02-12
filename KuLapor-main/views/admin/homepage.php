@@ -207,7 +207,7 @@ session_start();
     <div class="header">
         <div class="header-left">
             <img src="https://secure.gravatar.com/avatar/d194c6c98a5041637d4006baddfa05cb?s=128&d=mm&r=g" alt="" style="height: 50px;">
-            <button class="btn-logout"><a href="../logout.php">Logout</a></button>
+            <button class="btn-logout"><a href="../../logout.php">Logout</a></button>
         </div>
         <div class="header-right">
             Hi! Admin

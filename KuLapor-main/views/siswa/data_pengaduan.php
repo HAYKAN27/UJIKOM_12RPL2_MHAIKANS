@@ -12,6 +12,8 @@ $query = mysqli_query($koneksi, "SELECT * FROM input_aspirasi WHERE nis='$nis' O
 <!DOCTYPE html>
 <html>
 <head>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
     <title>Riwayat Laporan</title>
     <style>
         table {
@@ -42,16 +44,18 @@ $query = mysqli_query($koneksi, "SELECT * FROM input_aspirasi WHERE nis='$nis' O
 </head>
 <body>
 
-<h2>Riwayat Laporan Saya</h2>
+<div class="container-lg m-4">
 
-<table>
-    <thead>
-        <tr>
-            <th>No</th>
-            <th>NIS</th>
-            <th>Kategori</th>
-            <th>Lokasi</th>
-            <th>Keterangan</th>
+    <h2>Riwayat Laporan Saya</h2>
+    
+    <table>
+        <thead>
+            <tr>
+                <th>No</th>
+                <th>NIS</th>
+                <th>Kategori</th>
+                <th>Lokasi</th>
+                <th>Keterangan</th>
             <th>Status</th>
             <th>Detail</th>
         </tr>
@@ -68,12 +72,71 @@ $query = mysqli_query($koneksi, "SELECT * FROM input_aspirasi WHERE nis='$nis' O
             echo "<td>" . $data['lokasi'] . "</td>";
             echo "<td>" . $data['ket'] . "</td>";
             echo "<td>" . $data['status'] . "</td>";
-            echo "<td><a class='detail-btn' href='detail_laporan.php?id=" . $data['id_pelapor'] . "'>Detail</a></td>";
+            echo "<td>
+            <button 
+            type='button' 
+            class='btn btn-info btn-sm btn-detail'
+            data-id='" . $data['id_pelapor'] . "'
+            data-bs-toggle='modal'
+            data-bs-target='#detailModal'
+            >
+            Detail
+            </button>
+            </td>";
+
             echo "</tr>";
-        }
-        ?>
+            }
+            ?>
     </tbody>
+
+    
+    <!-- Modal Detail -->
+    <div class="modal fade" id="detailModal" tabindex="-1">
+        <div class="modal-dialog modal-lg modal-dialog-centered">
+            <div class="modal-content">
+                
+                <div class="modal-header">
+                    <h5 class="modal-title">Detail Pengaduan</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                
+                <div class="modal-body">
+                    <div class="row mb-2">
+                        <div class="col-md-6"><strong>NIS :</strong> <span id="detailNis"></span></div>
+                        <div class="col-md-6"><strong>Kategori :</strong> <span id="detailKategori"></span></div>
+                    </div>
+                    
+                    <div class="row mb-2">
+                        <div class="col-md-6"><strong>Lokasi :</strong> <span id="detailLokasi"></span></div>
+                        <div class="col-md-6"><strong>Tanggal :</strong> <span id="detailTanggal"></span></div>
+                    </div>
+
+                    <div class="row mb-2">
+                        <div class="col-md-6"><strong>Kode Pengaduan :</strong> <span id="detailKode"></span></div>
+                        <div class="col-md-6"><strong>Status :</strong> <span id="detailStatus"></span></div>
+                    </div>
+                    
+                    <div class="mb-3">
+                        <strong>Keterangan :</strong>
+                        <div class="border rounded p-3 mt-1 bg-light">
+                            <span id="detailKeterangan"></span>
+                        </div>
+                    </div>
+                    
+                    <div class="mb-3">
+                        <strong>Pesan Admin :</strong>
+                        <div class="border rounded p-3 mt-1 bg-light">
+                            <span id="detailPesan"></span>
+                        </div>
+                    </div>
+                    
+                </div>
+                
+            </div>
+        </div>
+    </div>
 </table>
+</div>
 
 </body>
 </html>

@@ -16,7 +16,7 @@ $query = mysqli_query($koneksi, "SELECT * FROM user WHERE role='siswa'");
 <body>
 
 <div class="container mt-5">
-    <h2 class="mb-4 text-center">Daftar Akun Siswa</h2>
+    <h2 class="mb-4">Daftar Akun Siswa</h2>
 
     <div class="card">
         <div class="card-body">

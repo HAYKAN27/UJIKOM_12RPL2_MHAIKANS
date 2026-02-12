@@ -202,7 +202,7 @@
     <div class="header">
         <div class="header-left">
             <div class=""><img src="https://www.smkmutucikampek.sch.id/wp-content/uploads/2021/06/logo_mutu_png_transparant-removebg-preview-1.png" alt="" style="height: 50px;"></div>
-            <button class="btn-logout"><a href="homepage.php"></a>Logout</button>
+            <button class="btn-logout"><a href="../../logout.php">Logout</a></button>
         </div>
         <div class="header-right">
             <!-- <?php 

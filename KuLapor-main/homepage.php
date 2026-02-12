@@ -28,24 +28,9 @@
             align-items: center;
             gap: 15px;
         }
-
-        .logo {
-            width: 50px;
-            height: 50px;
-            border: black 2px solid;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-weight: bold;
-            font-size: 18px;
-            flex-shrink: 0;
-        }
-
         .school-name {
             font-size: 14px;
-            font-weight: 600;
+            font-weight: 700;
             color: #333;
             line-height: 1.4;
         }
@@ -137,7 +122,7 @@
 
 <body>
     <div class="header">
-        <div class="logo"><img src="+" alt=""></div>
+        <div class="logo"><img src="https://secure.gravatar.com/avatar/d194c6c98a5041637d4006baddfa05cb?s=128&d=mm&r=g" alt="" style="height: 50px;"></div>
         <div class="school-name">
             SMK MUHAMMADIYAH<br>
             CIKAMPEK
