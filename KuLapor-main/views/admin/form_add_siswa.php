@@ -151,7 +151,7 @@
 
 <body>
     <div class="container">
-        <h2>Form Data Siswa</h2>
+        <h2>Menambahkan Akun Siswa</h2>
         <form action="../../ControllerAdmin/data_siswa.php" method="post">
             
             <div class="form-group">
