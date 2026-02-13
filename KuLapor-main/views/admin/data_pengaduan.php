@@ -662,16 +662,6 @@
                 <h1>Data Pengaduan</h1>
                 <p class="page-subtitle">Kelola dan tanggapi pengaduan siswa</p>
             </div>
-            <div class="page-actions">
-                <button class="btn-secondary-custom">
-                    <i class="fas fa-download"></i>
-                    Export Data
-                </button>
-                <button class="btn-primary-custom">
-                    <i class="fas fa-filter"></i>
-                    Filter
-                </button>
-            </div>
         </div>
 
         <!-- Stats Cards -->

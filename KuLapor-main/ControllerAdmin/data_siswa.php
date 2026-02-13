@@ -3,7 +3,7 @@ include  '../config/koneksi.php';
 
 $nis      = $_POST['nis'];
 $username = $_POST['nama'];
-$password = password_hash($_POST['password'], PASSWORD_DEFAULT);
+$password = "password123";
 $kelas    = $_POST['kelas'];
 $role     = 'siswa';
 
@@ -15,7 +15,10 @@ VALUES
 $query = mysqli_query($koneksi, $insert);
 
 if ($query) {
-    echo "berhasil";
+        echo "<script>
+                alert('Data berhasil ditambahkan');
+                window.location='../views/admin/data_siswa.php';
+              </script>";
 }
 else{
     echo"gagal";

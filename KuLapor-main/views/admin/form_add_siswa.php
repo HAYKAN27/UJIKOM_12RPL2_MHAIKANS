@@ -163,11 +163,6 @@
                 <label for="nama">Nama Lengkap</label>
                 <input type="text" id="nama" name="nama" placeholder="Masukkan nama lengkap" required>
             </div>
-
-            <div class="form-group">
-                <label for="nama">password</label>
-                <input type="password" id="password" name="password" placeholder="Masukan password" required>
-            </div>
             <div class="form-group">
                 <label for="kelas">Kelas</label>
                 <input type="text" id="kelas" name="kelas" placeholder="Contoh: X IPA 1" required>

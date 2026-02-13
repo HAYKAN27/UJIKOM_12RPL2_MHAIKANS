@@ -467,13 +467,6 @@ session_start();
                     </div>
                     <span class="brand-text">KULAPOR</span>
                 </a>
-                <nav>
-                    <ul class="nav-menu">
-                        <li><a href="#" class="nav-link">Dashboard</a></li>
-                        <li><a href="#" class="nav-link">Pengaduan</a></li>
-                        <li><a href="#" class="nav-link">Laporan</a></li>
-                    </ul>
-                </nav>
             </div>
             <div class="header-right">
                 <div class="user-info">

@@ -43,7 +43,7 @@ $query = mysqli_query($koneksi, "SELECT * FROM user WHERE role='siswa'");
                             <span class="badge bg-success"><?= $data['role']; ?></span>
                         </td>
                         <td class="text-center">
-                            <button class="badge bg-warning"><a href="">EDIT</a></button>
+                            <button class="badge bg-warning"><a href="edit_data_siswa.php">EDIT</a></button>
                         </td>
                     </tr>
                     <?php } ?>

@@ -212,7 +212,7 @@ if (isset($_POST['update'])) {
     if ($update) {
         echo "<script>
                 alert('Feedback berhasil disimpan!');
-                window.location='data_aspirasi.php';
+                window.location='data_pengaduan.php';
               </script>";
     } else {
         echo "Gagal update data : " . mysqli_error($koneksi);
@@ -228,9 +228,9 @@ if (isset($_POST['update'])) {
                 </div>
                 <span class="brand-text">KULAPOR</span>
             </a>
-            <a href="homepage.php" class="btn-back">
+            <a href="data_pengaduan.php" class="btn-back">
                 <i class="fas fa-arrow-left"></i>
-                Kembali ke Dashboard
+                Kembali ke Data pengaduan
             </a>
         </div>
     </header>
