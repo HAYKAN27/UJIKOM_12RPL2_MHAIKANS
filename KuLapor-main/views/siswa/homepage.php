@@ -225,7 +225,7 @@
             </div>
 
             <div class="menu-item">
-                <a href="#" class="menu-button">Ubah Password</a>
+                <a href="form_ganti_password.php" class="menu-button">Ubah Password</a>
             </div>
         </div>
 

@@ -148,15 +148,9 @@
                             data-status='" . $row['status'] . "'
                             data-feedback='" . $row['feedback'] . "'
                         >Lihat</button> ";
+                            echo "<button
+                            class'btn btn-warning'>Menanggapi</button> ";
 
-                            echo "<button 
-                            class='btn btn-sm btn-warning btn-edit'
-                            data-bs-toggle='modal'
-                            data-bs-target='#editModal'
-                            data-id='" . $row['id_pelapor'] . "'
-                            data-status='" . $row['status'] . "'
-                            data-feedback='" . $row['feedback'] . "'
-                        >Edit</button>";
 
                             echo "</td>";
                             echo "</tr>";
