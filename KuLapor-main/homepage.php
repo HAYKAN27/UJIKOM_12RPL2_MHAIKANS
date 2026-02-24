@@ -39,8 +39,8 @@
             background: white;
             display: flex;
             flex-direction: column;
+            height: 100vh;
             justify-content: center;
-            align-items: center;
             padding: 60px 40px;
             text-align: center;
         }

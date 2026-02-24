@@ -1,12 +1,17 @@
 <?php
 session_start();
 
+include '../../config/koneksi.php' ;
+
 if (!isset($_SESSION['nis'])) {
     header("Location: /PROJECT-UJIKOM/Kulapor-main/login.php");
     exit;
+
+
 }
 
 $nis = $_SESSION['nis'];
+
 ?>
 <!DOCTYPE html>
 <html lang="id">
@@ -37,7 +42,7 @@ $nis = $_SESSION['nis'];
             box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
             padding: 40px;
             width: 100%;
-            max-width: 500px;
+            max-width: 700px;
         }
 
         h1 {
@@ -60,6 +65,7 @@ $nis = $_SESSION['nis'];
         }
 
         input[type="text"],
+        input[type="date"],
         select,
         textarea {
             width: 100%;
@@ -132,21 +138,30 @@ $nis = $_SESSION['nis'];
                 <input type="text" value="<?= $nis ?>" readonly>
                 <input type="hidden" name="nis" value="<?= $nis ?>">
             </div>
+                <div class="form-group">
+                    <label for="kategori">Kategori</label>
 
-            <div class="form-group">
-                <label for="kategori">Kategori</label>
-                <select id="id_kategori" name="id_kategori">
-                    <option value="">Pilih Kategori</option>
-                    <option value="1">Elektronik</option>
-                    <option value="2">Kebersihan</option>
-                    <option value="3">Fasilitas kelas</option>
-                </select>
-                <small class="helper-text">Fasilitas kelas, kebersihan, kantin</small>
-            </div>
+                    <select name="id_kategori" id="kategori">
+                        <option value="">-- Pilih Kategori --</option>
+
+                        <?php
+                        $kategori = mysqli_query($koneksi, "SELECT * FROM kategori");
+
+                        while ($data = mysqli_fetch_assoc($kategori)) {
+                            echo "<option value='".$data['id_kategori']."'>".$data['ket_kategori']."</option>";
+                        }
+                        ?>
+                    </select>
+                </div>
 
             <div class="form-group">
                 <label for="lokasi">Lokasi</label>
-                <input type="text" id="lokasi" name="lokasi" placeholder="Contoh: Ruang Kelas 7A, Toilet Lt.2">
+                <input type="text" id="lokasi" name="lokasi" placeholder="di Kantin belakang">
+            </div>
+
+            <div class="form-group">
+                <label for="tanggal">Tanggal</label>
+                <input type="date" id="tanggal" name="tanggal">
             </div>
 
             <div class="form-group">

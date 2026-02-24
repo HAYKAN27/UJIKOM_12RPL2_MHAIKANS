@@ -1,4 +1,5 @@
                     <?php
+                    
                     session_start();
                     
                     include '../../config/koneksi.php';
@@ -6,14 +7,14 @@
                     $no = 1;
 
                     // ambil semua data siswa
-                    $query = mysqli_query($koneksi, "SELECT * FROM user WHERE role='siswa'");
+                    $query = mysqli_query($koneksi, "SELECT * FROM kategori ");
 
                     // PROSES DELETE
                     if (isset($_GET['hapus'])) {
 
-                        $nis = $_GET['hapus'];
-                        mysqli_query($koneksi, "DELETE FROM user WHERE nis='$nis'");
-                        header("Location: data_siswa.php");
+                        $id = $_GET['hapus'];
+                        mysqli_query($koneksi, "DELETE FROM kategori WHERE id_kategori='$id'");
+                        header("Location: data_kategori.php");
                         exit();
                     }
                     ?>
@@ -36,15 +37,6 @@
 
                         <!-- Bootstrap CSS -->
                         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
-
-                        <!-- jQuery -->
-                        <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
-
-                        <!-- DataTables CSS -->
-                        <link rel="stylesheet" href="https://cdn.datatables.net/1.13.8/css/jquery.dataTables.min.css">
-
-                        <!-- DataTables JS -->
-                        <script src="https://cdn.datatables.net/1.13.8/js/jquery.dataTables.min.js"></script>
 
                         <!-- Bootstrap JS -->
                         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
@@ -184,6 +176,35 @@
                                 display: flex;
                                 justify-content: space-between;
                                 align-items: center;
+                            }
+                            .page-header button{
+                                border: none;
+                                padding: 10px;
+                                background-color: var(--gray-300) ;
+                                border-radius: 5px;
+                                text-decoration: none;
+                                transition: 0.5s;
+                                
+                            }
+                            .page-header button:hover{
+                                background-color: var(--gray-900) ;
+                   
+                                
+                            }
+                            .page-header button a:hover{
+                                color: white;
+                                
+                            }
+                            .page-header button a{
+                                font-family: 'Roboto', sans-serif;
+                                font-size: 15px;
+                                font-weight: 500;
+                                text-decoration: none;
+                                font-size: 15px;
+                                color: black;
+                                transition: 0.5s;
+
+
                             }
 
                             .page-title-section h1 {
@@ -599,33 +620,6 @@
                                 color: var(--gray-600);
                             }
                         </style>
-
-                        <script>
-                            $(document).ready(function() {
-                                $('#datatable').DataTable({
-                                    "language": {
-                                        "search": "Cari:",
-                                        "lengthMenu": "Tampilkan _MENU_ entri",
-                                        "info": "Menampilkan _START_ - _END_ dari _TOTAL_ data",
-                                        "paginate": {
-                                            "next": "Selanjutnya",
-                                            "previous": "Sebelumnya"
-                                        },
-                                        "zeroRecords": "Data tidak ditemukan",
-                                        "infoEmpty": "Tidak ada data tersedia",
-                                        "infoFiltered": "(difilter dari _MAX_ total data)"
-                                    },
-                                    "pageLength": 10,
-                                    "order": [
-                                        [0, 'asc']
-                                    ],
-                                    "columnDefs": [{
-                                        "orderable": false,
-                                        "targets": 5
-                                    }]
-                                });
-                            });
-                        </script>
                     </head>
 
                     <body>
@@ -651,21 +645,23 @@
                             <ul class="breadcrumb-custom">
                                 <li><a href="index.php">Dashboard</a></li>
                                 <li>/</li>
-                                <li>Data Akun Siswa</li>
+                                
+                                <li>Data Kategori</li>
                             </ul>
 
                             <!-- Page Header -->
                             <div class="page-header">
                                 <div class="page-title-section">
-                                    <h1>Data Akun siswa</h1>
-                                    <p class="page-subtitle">Kelola Data akun siswa</p>
+                                    <h1>Data Kategori</h1>
+                                    <p class="page-subtitle">Kelola Data Kategori</p>
                                 </div>
+                                <button><a href="form_add_kategori.php">+ Menambahkan Data Kategori</a></button>
                             </div>
 
 
                             <div class="table-container">
                                 <div class="table-header">
-                                    <h2 class="table-title">Daftar Akun Siswa </h2>
+                                    <h2 class="table-title">Daftar Pengaduan</h2>
                                 </div>
 
                                 <div class="table-wrapper">
@@ -673,10 +669,8 @@
                                         <thead>
                                             <tr>
                                                 <th>No</th>
-                                                <th>NIS</th>
-                                                <th>Nama siswa</th>
-                                                <th>Kelas</th>
-                                                <th>Role</th>
+                                                <th>ID Kategori </th>
+                                                <th>Keterangan Kategori</th>
                                                 <th>Aksi</th>
                                             </tr>
                                         </thead>
@@ -688,16 +682,14 @@
                                             ?>
                                                 <tr>
                                                     <td><?= $no++; ?></td>
-                                                    <td><?= $data['nis']; ?></td>
-                                                    <td><?= $data['Username']; ?></td>
-                                                    <td><?= $data['kelas']; ?></td>
-                                                    <td><?= $data['role']; ?></td>
+                                                    <td><?= $data['id_kategori']; ?></td>
+                                                    <td><?= $data['ket_kategori']; ?></td>
                                                     <td>
-                                                        <a href="?hapus=<?= $data['nis']; ?>" class="btn-action btn-respond"
+                                                        <a href="?hapus=<?= $data['id_kategori']; ?>" class="btn-action btn-respond"
                                                             onclick="return confirm('Yakin hapus data?')">
                                                             <i class="fas fa-trash"></i> Hapus
                                                         </a>
-                                                        <a href="edit_data_siswa.php?id=<?= $data['id']; ?>" class="btn-action btn-detail">
+                                                        <a href="edit_kategori.php?edit=<?= $data['id_kategori']; ?>" class="btn-action btn-detail">
                                                             <i class="fas fa-edit"></i> Edit
                                                         </a>
                                                     </td>

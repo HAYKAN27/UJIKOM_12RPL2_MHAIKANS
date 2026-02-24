@@ -3,33 +3,31 @@
         include '../../config/koneksi.php';
 
         // 1. Ambil ID dari link "edit"
-        $id = $_GET['id'];
+        $id = $_GET['edit'];
 
         // 2. Jika tombol update ditekan
         if (isset($_POST['update'])) {
 
-            $nis   = $_POST['nis'];
-            $nama = $_POST['nama'];
-            $password = $_POST['password'];
-            $kelas = $_POST['kelas'];
+            $kategori  = $_POST['kategori'];
 
             // Query UPDATE
             $update = mysqli_query($koneksi, "
-                UPDATE `user`
-                SET nis='$nis', Username='$nama',kelas='$kelas', password='$password' 
-                WHERE id='$id'
+                UPDATE `kategori`
+                SET ket_kategori='$kategori'
+                WHERE id_kategori='$id'
             ");
 
             if ($update) {
                 echo "<script>
                         alert('Data berhasil di update!');
-                        window.location='data_siswa.php';
+                        window.location='data_kategori.php';
               </script>";
             } else {
                 echo "Gagal update data : " . mysqli_error($koneksi);
             }
         }
         ?>
+
 <!DOCTYPE html>
 <html lang="id">
 <head>
@@ -200,76 +198,29 @@
 <body>
     <div class="card">
         <div class="card-header">
-            <h2 class="card-title">Edit Data Siswa</h2>
+            <h2 class="card-title">Edit Kategori</h2>
         </div>
         <div class="card-body">
         <form method="POST">
-
-                
-                <!-- NIS -->
                 <div class="form-group">
                     <label class="form-label">
-                        NIS <span class="required">*</span>
+                        Kategori<span class="required">*</span>
                     </label>
                     <input 
                         type="text" 
-                        name="nis" 
+                        name="kategori" 
                         class="form-control" 
-                        placeholder="Masukkan NIS" 
+                        placeholder="Masukkan kategori baru" 
                         required
                     >
                 </div>
-
-                <!-- Nama -->
-                <div class="form-group">
-                    <label class="form-label">
-                        Nama Lengkap <span class="required">*</span>
-                    </label>
-                    <input 
-                        type="text" 
-                        name="nama" 
-                        class="form-control" 
-                        placeholder="Masukkan nama lengkap" 
-                        required
-                    >
-                </div>
-
-                <!-- Kelas -->
-                <div class="form-group">
-                    <label class="form-label">
-                        Kelas <span class="required">*</span>
-                    </label>
-                    <select name="kelas" class="form-control form-select" required>
-                        <option value="">-- Pilih Kelas -- </option>
-                        <option value="12 RPL 1">12 RPL 1</option>
-                        <option value="12 RPL 2">12 RPL2</option>
-                        <option value="12 TKJ 1">12 TKJ 1</option>
-                        <option value="12 TKJ 3">12 TKJ 2</option>
-                        <option value="12 TKJ 3">12 TKJ 3</option>
-                        <option value="12 TKJ SAMSUNG">12 TKJ SAMSUNG</option>
-                    </select>
-                </div>
-
-                <!-- Password -->
-                <div class="form-group">
-                    <label class="form-label">
-                        Password Baru
-                    </label>
-                    <input 
-                        type="password" 
-                        name="password" 
-                        class="form-control" 
-                        placeholder="Kosongkan jika tidak ingin mengubah"
-                    >
-                </div>
-
                 <!-- Action Buttons -->
                 <div class="form-actions">
-                    <a href="data_siswa.php" class="btn btn-secondary">
+                    <a href="data_kategori.php" class="btn btn-secondary">
                         Batal
                     </a>
-                    <button type="submit" name="update" class="btn btn-primary">
-                        Simpan Perubahan
+                    <button type="submit" class="btn btn-primary" name="update">
+                        Simpan perubahan
                     </button>
                 </div>
             </form>

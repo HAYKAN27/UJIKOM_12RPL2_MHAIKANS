@@ -1,3 +1,8 @@
+<?php
+session_start();
+
+?>
+
 <!DOCTYPE html>
 <html lang="id">
 
@@ -218,33 +223,6 @@
             background: var(--gray-100);
         }
 
-        /* Stats Cards */
-        .stats-row {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 16px;
-            margin-bottom: 24px;
-        }
-
-        .stat-card {
-            background: var(--white);
-            border: 1px solid var(--gray-200);
-            border-radius: 8px;
-            padding: 20px;
-        }
-
-        .stat-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 12px;
-        }
-
-        .stat-label {
-            font-size: 13px;
-            color: var(--gray-600);
-            font-weight: 500;
-        }
 
         .stat-icon {
             width: 36px;
@@ -664,50 +642,10 @@
             </div>
         </div>
 
-        <!-- Stats Cards -->
-        <div class="stats-row">
-            <div class="stat-card">
-                <div class="stat-header">
-                    <span class="stat-label">Total Pengaduan</span>
-                    <div class="stat-icon" style="background: #EDE9FE; color: #7C3AED;">
-                        <i class="fas fa-clipboard-list"></i>
-                    </div>
-                </div>
-                <div class="stat-value">0</div>
-            </div>
-            <div class="stat-card">
-                <div class="stat-header">
-                    <span class="stat-label">Menunggu</span>
-                    <div class="stat-icon pending">
-                        <i class="fas fa-clock"></i>
-                    </div>
-                </div>
-                <div class="stat-value">0</div>
-            </div>
-            <div class="stat-card">
-                <div class="stat-header">
-                    <span class="stat-label">Diproses</span>
-                    <div class="stat-icon process">
-                        <i class="fas fa-spinner"></i>
-                    </div>
-                </div>
-                <div class="stat-value">0</div>
-            </div>
-            <div class="stat-card">
-                <div class="stat-header">
-                    <span class="stat-label">Selesai</span>
-                    <div class="stat-icon done">
-                        <i class="fas fa-check-circle"></i>
-                    </div>
-                </div>
-                <div class="stat-value">0</div>
-            </div>
-        </div>
 
-        <!-- Table Container -->
         <div class="table-container">
             <div class="table-header">
-                <h2 class="table-title">Daftar Pengaduan</h2>
+                <h2 class="table-title">Daftar Pengaduan    </h2>
             </div>
 
             <div class="table-wrapper">
@@ -754,25 +692,14 @@
                                         </span>
                                     </td>";
                                 echo "<td>";
-
                                 echo "<button 
-                                        class='btn-action btn-detail'
-                                        data-bs-toggle='modal'
-                                        data-bs-target='#detailModal'
-                                        data-id='" . $row['id_pelapor'] . "'
-                                        data-nis='" . $row['nis'] . "'
-                                        data-nama='" . $row['username'] . "'
-                                        data-kelas='" . $row['kelas'] . "'
-                                        data-kategori='" . $row['ket_kategori'] . "'
-                                        data-lokasi='" . $row['lokasi'] . "'
-                                        data-ket='" . $row['ket'] . "'
-                                        data-status='" . $row['status'] . "'
-                                        data-feedback='" . $row['feedback'] . "'
-                                    >
+                                        onclick=\"window.location.href='detail_pengaduan.php?id=" . $row['id_pelapor'] . "'\" 
+                                        class='btn-action btn-detail'>
                                         <i class='fas fa-eye'></i> Detail
-                                    </button> ";
+                                    </button>";
 
-                                echo "<a href='detail_pengaduan.php?id=" . $row['id_pelapor'] . "' class='btn-action btn-respond'>
+
+                                echo "<a href='feedback_pengaduan.php?id=" . $row['id_pelapor'] . "' class='btn-action btn-respond'>
                                         <i class='fas fa-reply'></i> Tanggapi
                                     </a>";
 
@@ -797,91 +724,6 @@
             </div>
         </div>
     </main>
-
-    <!-- Modal Detail -->
-    <div class="modal fade" id="detailModal" tabindex="-1" aria-labelledby="detailModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-lg modal-dialog-centered">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="detailModalLabel">
-                        <i class="fas fa-file-alt"></i> Detail Pengaduan
-                    </h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <!-- Informasi Pelapor -->
-                    <h6 style="font-weight: 600; color: var(--gray-700); margin-bottom: 16px; font-size: 15px;">
-                        <i class="fas fa-user"></i> Informasi Pelapor
-                    </h6>
-                    
-                    <div class="detail-row">
-                        <span class="detail-label">NIS</span>
-                        <span class="detail-value" id="detailNis">-</span>
-                    </div>
-                    <div class="detail-row">
-                        <span class="detail-label">Nama Siswa</span>
-                        <span class="detail-value" id="detailNama">-</span>
-                    </div>
-                    <div class="detail-row">
-                        <span class="detail-label">Kelas</span>
-                        <span class="detail-value" id="detailKelas">-</span>
-                    </div>
-
-                    <div class="section-divider"></div>
-
-                    <!-- Detail Pengaduan -->
-                    <h6 style="font-weight: 600; color: var(--gray-700); margin-bottom: 16px; font-size: 15px;">
-                        <i class="fas fa-clipboard-list"></i> Detail Pengaduan
-                    </h6>
-                    
-                    <div class="detail-row">
-                        <span class="detail-label">Kategori</span>
-                        <span class="detail-value" id="detailKategori">-</span>
-                    </div>
-                    <div class="detail-row">
-                        <span class="detail-label">Lokasi Kejadian</span>
-                        <span class="detail-value" id="detailLokasi">-</span>
-                    </div>
-                    <div class="detail-row">
-                        <span class="detail-label">Status</span>
-                        <span class="detail-value" id="detailStatus">-</span>
-                    </div>
-
-                    <div style="margin-top: 20px;">
-                        <span class="detail-label">Keterangan Pengaduan</span>
-                        <div class="detail-box" id="detailKeterangan">-</div>
-                    </div>
-
-                    <div class="section-divider"></div>
-
-                    <!-- Tanggapan Admin -->
-                    <h6 style="font-weight: 600; color: var(--gray-700); margin-bottom: 16px; font-size: 15px;">
-                        <i class="fas fa-comment-dots"></i> Tanggapan Admin
-                    </h6>
-                    
-                    <div class="detail-box" id="detailPesan">Belum ada tanggapan</div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <script>
-        document.addEventListener("DOMContentLoaded", function() {
-            // Handle Detail Button Click
-            document.querySelectorAll(".btn-detail").forEach(button => {
-                button.addEventListener("click", function() {
-                    document.getElementById("detailNis").innerText = this.dataset.nis || "-";
-                    document.getElementById("detailNama").innerText = this.dataset.nama || "-";
-                    document.getElementById("detailKelas").innerText = this.dataset.kelas || "-";
-                    document.getElementById("detailKategori").innerText = this.dataset.kategori || "-";
-                    document.getElementById("detailLokasi").innerText = this.dataset.lokasi || "-";
-                    document.getElementById("detailStatus").innerText = this.dataset.status || "-";
-                    document.getElementById("detailKeterangan").innerText = this.dataset.ket || "-";
-                    document.getElementById("detailPesan").innerText = this.dataset.feedback || "Belum ada tanggapan";
-                });
-            });
-        });
-    </script>
 </body>
 
 </html>

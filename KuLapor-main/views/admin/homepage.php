@@ -1,5 +1,7 @@
 <?php
 session_start();
+
+
 ?>
 
 <!DOCTYPE html>
@@ -27,6 +29,7 @@ session_start();
             --gray-100: #F3F4F6;
             --gray-200: #E5E7EB;
             --gray-300: #D1D5DB;
+            --gray-400: #9CA3AF;
             --gray-600: #4B5563;
             --gray-700: #374151;
             --gray-900: #111827;
@@ -90,26 +93,6 @@ session_start();
             font-weight: 700;
             color: var(--primary-blue);
             letter-spacing: 0.5px;
-        }
-
-        .nav-menu {
-            display: flex;
-            gap: 24px;
-            list-style: none;
-        }
-
-        .nav-link {
-            color: var(--gray-700);
-            text-decoration: none;
-            font-size: 14px;
-            font-weight: 500;
-            padding: 8px 12px;
-            border-radius: 4px;
-        }
-
-        .nav-link:hover {
-            background: var(--gray-100);
-            color: var(--primary-blue);
         }
 
         .header-right {
@@ -310,101 +293,7 @@ session_start();
             font-size: 12px;
         }
 
-        /* Stats Section */
-        .stats-section {
-            background: var(--white);
-            border: 1px solid var(--gray-200);
-            border-radius: 8px;
-            padding: 24px;
-            margin-bottom: 32px;
-        }
-
-        .stats-header {
-            font-family: 'Roboto', sans-serif;
-            font-size: 18px;
-            font-weight: 600;
-            color: var(--gray-900);
-            margin-bottom: 20px;
-            padding-bottom: 12px;
-            border-bottom: 1px solid var(--gray-200);
-        }
-
-        .stats-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 20px;
-        }
-
-        .stat-item {
-            padding: 16px;
-            background: var(--gray-50);
-            border-radius: 6px;
-            border-left: 3px solid var(--secondary-blue);
-        }
-
-        .stat-label {
-            font-size: 12px;
-            color: var(--gray-600);
-            font-weight: 500;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            margin-bottom: 6px;
-        }
-
-        .stat-value {
-            font-family: 'Roboto', sans-serif;
-            font-size: 24px;
-            font-weight: 700;
-            color: var(--primary-blue);
-        }
-
-        /* Info Panel */
-        .info-panel {
-            background: linear-gradient(135deg, var(--primary-blue) 0%, var(--secondary-blue) 100%);
-            border-radius: 8px;
-            padding: 32px;
-            color: var(--white);
-            margin-top: 32px;
-        }
-
-        .info-panel-title {
-            font-family: 'Roboto', sans-serif;
-            font-size: 22px;
-            font-weight: 600;
-            margin-bottom: 12px;
-        }
-
-        .info-panel-text {
-            font-size: 14px;
-            line-height: 1.6;
-            opacity: 0.95;
-        }
-
-        .info-features {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 16px;
-            margin-top: 24px;
-        }
-
-        .info-feature {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            font-size: 14px;
-        }
-
-        .info-feature i {
-            font-size: 16px;
-        }
-
         /* Responsive */
-        @media (max-width: 1024px) {
-            .nav-menu {
-                display: none;
-            }
-        }
-
         @media (max-width: 768px) {
             .header-container {
                 padding: 12px 16px;
@@ -438,21 +327,6 @@ session_start();
             .dashboard-grid {
                 grid-template-columns: 1fr;
             }
-
-            .info-features {
-                grid-template-columns: 1fr;
-            }
-        }
-
-        /* Utility Classes */
-        .text-muted {
-            color: var(--gray-600);
-        }
-
-        .divider {
-            height: 1px;
-            background: var(--gray-200);
-            margin: 24px 0;
         }
     </style>
 </head>
@@ -487,7 +361,7 @@ session_start();
     <!-- Main Content -->
     <main class="main-wrapper">
         <!-- Breadcrumb -->
-        <div class="breadcrumb">
+        <div class="breadcrumb">    
             <a href="#">Beranda</a>
             <span>/</span>
             <span>Dashboard</span>
@@ -498,30 +372,6 @@ session_start();
             <h1 class="page-title">Dashboard Administrator</h1>
             <p class="page-subtitle">Kelola sistem pengaduan dan data siswa secara terpusat</p>
         </div>
-
-        <!-- Stats Section -->
-        <div class="stats-section">
-            <h2 class="stats-header">Ringkasan Statistik</h2>
-            <div class="stats-grid">
-                <div class="stat-item">
-                    <div class="stat-label">Total Pengaduan</div>
-                    <div class="stat-value">0</div>
-                </div>
-                <div class="stat-item">
-                    <div class="stat-label">Pengaduan Aktif</div>
-                    <div class="stat-value">0</div>
-                </div>
-                <div class="stat-item">
-                    <div class="stat-label">Total Siswa</div>
-                    <div class="stat-value">0</div>
-                </div>
-                <div class="stat-item">
-                    <div class="stat-label">Kategori</div>
-                    <div class="stat-value">0</div>
-                </div>
-            </div>
-        </div>
-
         <!-- Menu Cards -->
         <div class="dashboard-grid">
             <!-- Card 1 -->
@@ -535,7 +385,7 @@ session_start();
                 <div class="menu-content">
                     <h3 class="menu-title">Manajemen Kategori</h3>
                     <p class="menu-description">Kelola kategori pengaduan, tambah, edit, atau hapus kategori sesuai kebutuhan sistem.</p>
-                    <a href="#" class="menu-link">
+                    <a href="data_kategori.php" class="menu-link">
                         Akses Menu <i class="fas fa-arrow-right"></i>
                     </a>
                 </div>
