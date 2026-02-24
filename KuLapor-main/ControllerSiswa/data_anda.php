@@ -1,21 +1,22 @@
 <?php
 session_start();
-include '../config/koneksi.php';
+include '../../config/koneksi.php';
 
 // ambil nis dari session
 $nis = $_SESSION['nis'];
 
 $query = mysqli_query($koneksi, "
-    SELECT * FROM input_aspirasi 
-    WHERE nis = '$nis'
-    ORDER BY id_pelapor DESC
+    SELECT 
+        input_aspirasi.*,
+        user.nis,
+        user.Username,
+        user.kelas,
+        kategori.ket_kategori
+    FROM input_aspirasi
+    INNER JOIN user ON input_aspirasi.nis = user.nis
+    INNER JOIN kategori ON input_aspirasi.id_kategori = kategori.id_kategori
+    WHERE input_aspirasi.nis = '$nis'
 ");
 
-while ($data = mysqli_fetch_assoc($query)) {
-    echo "<b>Lokasi:</b> " . $data['lokasi'] . "<br>";
-    echo "<b>Kategori:</b> " . $data['id_kategori'] . "<br>";
-    echo "<b>Keterangan:</b> " . $data['ket'] . "<br>";
-    echo "<b>Status:</b> " . $data['status'] . "<br>";
-    echo "<b>Feedback:</b> " . $data['feedback'] . "<hr>";
-}
+
 ?>

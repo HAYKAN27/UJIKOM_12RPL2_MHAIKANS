@@ -1,10 +1,26 @@
+<?php
+include '../../config/koneksi.php';
+session_start();
+
+if (!isset($_SESSION['username'])) {
+    header("Location: ../../login_siswa.php");
+    exit;
+}
+
+$nama = $_SESSION['username'];
+
+?>
 
 <!DOCTYPE html>
 <html lang="id">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>KULAPOR - Homepage User</title>
+    <title>KULAPOR - Dashboard Admin</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;600;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <style>
         * {
             margin: 0;
@@ -12,16 +28,44 @@
             box-sizing: border-box;
         }
 
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: #f5f5f5;
-            min-height: 100vh;
+        :root {
+            --primary-blue: #0C4A6E;
+            --secondary-blue: #0284C7;
+            --accent-blue: #0EA5E9;
+            --light-blue: #E0F2FE;
+            --white: #FFFFFF;
+            --gray-50: #F9FAFB;
+            --gray-100: #F3F4F6;
+            --gray-200: #E5E7EB;
+            --gray-300: #D1D5DB;
+            --gray-400: #9CA3AF;
+            --gray-600: #4B5563;
+            --gray-700: #374151;
+            --gray-900: #111827;
         }
 
+        body {
+            font-family: 'Open Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: var(--gray-50);
+            color: var(--gray-900);
+            line-height: 1.6;
+        }
+
+        /* Header */
         .header {
-            background: white;
-            padding: 20px 40px;
-            border-bottom: 2px solid #e0e0e0;
+            background: var(--white);
+            border-bottom: 1px solid var(--gray-200);
+            padding: 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+        }
+
+        .header-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 16px 32px;
             display: flex;
             align-items: center;
             justify-content: space-between;
@@ -30,211 +74,396 @@
         .header-left {
             display: flex;
             align-items: center;
-            gap: 20px;
+            gap: 32px;
         }
 
-        .logo {
-            width: 50px;
-            height: 50px;
-            background: #1e40af;
-            border-radius: 50%;
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+        }
+
+        .brand-logo {
+            width: 42px;
+            height: 42px;
+            background: var(--primary-blue);
+            border-radius: 6px;
             display: flex;
             align-items: center;
             justify-content: center;
-            color: white;
-            font-weight: bold;
+            color: var(--white);
             font-size: 18px;
         }
 
-        .btn-logout {
-            padding: 12px 30px;
-            font-size: 16px;
-            font-weight: 600;
-            border: 3px solid #000;
-            border-radius: 10px;
-            background: white;
-            color: #000;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-
-        .btn-logout:hover {
-            background: #f5f5f5;
-            transform: scale(1.05);
+        .brand-text {
+            font-family: 'Roboto', sans-serif;
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--primary-blue);
+            letter-spacing: 0.5px;
         }
 
         .header-right {
-            font-size: 24px;
-            font-weight: 600;
-            color: #000;
-        }
-
-        .main-content {
-            background: white;
-            min-height: calc(100vh - 90px);
-            padding: 60px 40px;
-            display: flex;
-            justify-content: space-around;
-            align-items: center;
-            gap: 80px;
-        }
-
-        .menu-section {
-            flex: 1;
-            max-width: 400px;
-        }
-
-        .menu-item {
             display: flex;
             align-items: center;
-            gap: 20px;
-            margin-bottom: 30px;
+            gap: 16px;
         }
 
-        .menu-number {
-            font-size: 48px;
-            font-weight: 700;
-            color: #000;
-            min-width: 60px;
+        .user-info {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 6px 12px;
+            border-radius: 6px;
+            border: 1px solid var(--gray-200);
+            background: var(--white);
         }
 
-        .menu-button {
-            padding: 15px 35px;
-            font-size: 18px;
+        .user-avatar {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            border: 2px solid var(--gray-200);
+        }
+
+        .user-details {
+            text-align: right;
+        }
+
+        .user-role {
+            font-size: 11px;
+            color: var(--gray-600);
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .user-name {
+            font-size: 14px;
             font-weight: 600;
-            border: 3px solid #000;
-            border-radius: 10px;
-            background: white;
-            color: #000;
+            color: var(--gray-900);
+        }
+
+        .btn-logout {
+            padding: 8px 16px;
+            font-size: 14px;
+            font-weight: 500;
+            border: 1px solid var(--gray-300);
+            border-radius: 6px;
+            background: var(--white);
+            color: var(--gray-700);
             cursor: pointer;
-            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .btn-logout a {
+            color: var(--gray-700);
             text-decoration: none;
-            display: inline-block;
-            text-align: center;
-            flex: 1;
         }
 
-        .menu-button:hover {
-            background: #000;
-            color: white;
-            transform: translateX(10px);
+        .btn-logout:hover {
+            background: var(--gray-100);
+            border-color: var(--gray-400);
         }
 
-        .illustration-section {
-            flex: 1;
-            max-width: 450px;
+        /* Main Content */
+        .main-wrapper {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 32px;
+        }
+
+        .page-header {
+            margin-bottom: 32px;
+        }
+
+        .page-title {
+            font-family: 'Roboto', sans-serif;
+            font-size: 28px;
+            font-weight: 700;
+            color: var(--gray-900);
+            margin-bottom: 8px;
+        }
+
+        .page-subtitle {
+            font-size: 14px;
+            color: var(--gray-600);
+            font-weight: 400;
+        }
+
+        .breadcrumb {
             display: flex;
-            justify-content: center;
-            align-items: center;
+            gap: 8px;
+            font-size: 13px;
+            color: var(--gray-600);
+            margin-bottom: 24px;
         }
 
-        .illustration-section img {
-            width: 100%;
-            max-width: 350px;
-            height: auto;
-            filter: drop-shadow(0 10px 30px rgba(0, 0, 0, 0.1));
+        .breadcrumb a {
+            color: var(--secondary-blue);
+            text-decoration: none;
         }
 
-        /* Ilustrasi placeholder jika tidak ada gambar */
-        .illustration-placeholder {
-            width: 350px;
-            height: 350px;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            border-radius: 20px;
+        .breadcrumb a:hover {
+            text-decoration: underline;
+        }
+
+        /* Dashboard Grid */
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 24px;
+            margin-bottom: 32px;
+        }
+
+        .menu-card {
+            background: var(--white);
+            border: 1px solid var(--gray-200);
+            border-radius: 8px;
+            padding: 24px;
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .menu-card:hover {
+            border-color: var(--secondary-blue);
+            box-shadow: 0 4px 12px rgba(12, 74, 110, 0.08);
+        }
+
+        .menu-header {
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+        }
+
+        .menu-icon-wrapper {
+            width: 48px;
+            height: 48px;
+            background: var(--light-blue);
+            border-radius: 8px;
             display: flex;
             align-items: center;
             justify-content: center;
-            color: white;
-            font-size: 24px;
+            flex-shrink: 0;
+        }
+
+        .menu-icon {
+            font-size: 22px;
+            color: var(--primary-blue);
+        }
+
+        .menu-badge {
+            font-size: 11px;
+            color: var(--gray-600);
+            background: var(--gray-100);
+            padding: 4px 8px;
+            border-radius: 4px;
             font-weight: 600;
-            box-shadow: 0 10px 40px rgba(102, 126, 234, 0.3);
         }
 
-        @media (max-width: 968px) {
-            .main-content {
-                flex-direction: column;
-                gap: 50px;
-                padding: 40px 30px;
-            }
-
-            .menu-section {
-                width: 100%;
-                max-width: 500px;
-            }
-
-            .illustration-section {
-                width: 100%;
-            }
+        .menu-content {
+            flex: 1;
         }
 
+        .menu-title {
+            font-family: 'Roboto', sans-serif;
+            font-size: 16px;
+            font-weight: 600;
+            color: var(--gray-900);
+            margin-bottom: 6px;
+        }
+
+        .menu-description {
+            font-size: 13px;
+            color: var(--gray-600);
+            line-height: 1.5;
+            margin-bottom: 16px;
+        }
+
+        .menu-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            color: var(--secondary-blue);
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        .menu-link:hover {
+            color: var(--primary-blue);
+        }
+
+        .menu-link i {
+            font-size: 12px;
+        }
+
+        /* Responsive */
         @media (max-width: 768px) {
-            .header {
-                padding: 15px 20px;
+            .header-container {
+                padding: 12px 16px;
                 flex-wrap: wrap;
-                gap: 15px;
+            }
+
+            .header-left {
+                gap: 16px;
+            }
+
+            .brand-text {
+                font-size: 18px;
             }
 
             .header-right {
-                font-size: 20px;
                 width: 100%;
-                text-align: center;
-                order: 3;
+                justify-content: space-between;
+                margin-top: 12px;
+                padding-top: 12px;
+                border-top: 1px solid var(--gray-200);
             }
 
-            .menu-number {
-                font-size: 36px;
-                min-width: 50px;
+            .main-wrapper {
+                padding: 20px 16px;
             }
 
-            .menu-button {
-                font-size: 16px;
-                padding: 12px 25px;
+            .page-title {
+                font-size: 24px;
             }
 
-            .illustration-placeholder {
-                width: 280px;
-                height: 280px;
+            .dashboard-grid {
+                grid-template-columns: 1fr;
             }
         }
     </style>
 </head>
 <body>
-    <div class="header">
-        <div class="header-left">
-            <div class=""><img src="https://www.smkmutucikampek.sch.id/wp-content/uploads/2021/06/logo_mutu_png_transparant-removebg-preview-1.png" alt="" style="height: 50px;"></div>
-            <button class="btn-logout"><a href="../../logout.php">Logout</a></button>
-        </div>
-        <div class="header-right">
-            <!-- <?php 
-                $nis = $_SESSION['nis'];            
-            ?>
-            <?php 
-                echo"HI Haikan";
-            ?> -->
-        </div>
-    </div>
-
-    <div class="main-content">
-        <div class="menu-section">
-            <div class="menu-item">
-                <a href="form_pengaduan.php" class="menu-button">Buat Pengaduan</a>
+    <!-- Header -->
+    <header class="header">
+        <div class="header-container">
+            <div class="header-left">
+                <a href="#" class="brand">
+                    <div class="brand-logo">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <span class="brand-text">KULAPOR</span>
+                </a>
             </div>
-
-            <div class="menu-item">
-                <a href="data_pengaduan.php" class="menu-button">Lihat pengaduan</a>
-            </div>
-
-            <div class="menu-item">
-                <a href="form_ganti_password.php" class="menu-button">Ubah Password</a>
+            <div class="header-right">
+                <div class="user-info">
+                    <img src="https://secure.gravatar.com/avatar/d194c6c98a5041637d4006baddfa05cb?s=128&d=mm&r=g" alt="Admin Avatar" class="user-avatar">
+                    <div class="user-details">
+                        <div class="user-role">SISWA</div>
+                        <div class="user-name"><?= $nama?></div>
+                    </div>
+                </div>
+                <button class="btn-logout">
+                    <i class="fas fa-sign-out-alt"></i>
+                    <a href="../../logout.php">Logout</a>
+                </button>
             </div>
         </div>
+    </header>
 
-        <div class="illustration-section">
-            <!-- Ganti dengan ilustrasi Anda -->
-            <!-- <div class="illustration-placeholder">
-
-            </div> -->
+    <!-- Main Content -->
+    <main class="main-wrapper">
+        <!-- Breadcrumb -->
+        <div class="breadcrumb">    
+            <a href="homepage.php">Beranda</a>
+            <span>/</span>
+            <span>Halaman utama</span>
         </div>
-    </div>
+
+        <!-- Page Header -->
+        <div class="page-header">
+            <h1 class="page-title">HALO SELAMAT DATANG KEMBALI <?= $nama ?>!</h1>
+            <p class="page-subtitle">Kelola sistem pengaduan dan data siswa secara terpusat</p>
+        </div>
+        <!-- Carousel -->
+        <div id="carouselKuLapor" class="carousel slide mt-3" data-bs-ride="carousel">
+            
+            <div class="carousel-indicators">
+                <button type="button" data-bs-target="#carouselKuLapor" data-bs-slide-to="0" class="active"></button>
+                <button type="button" data-bs-target="#carouselKuLapor" data-bs-slide-to="1"></button>
+                <button type="button" data-bs-target="#carouselKuLapor" data-bs-slide-to="2"></button>
+            </div>
+
+            <div class="carousel-inner rounded shadow">
+
+                <div class="carousel-item active">
+                    <img src="../../public/img/SMKMUTU (1).jpeg" class="d-block w-100" style="height:350px; object-fit:cover;">
+                </div>
+
+                <div class="carousel-item">
+                    <img src="../../public/img/SMKMUTU2 (1).jpg" class="d-block w-100" style="height:350px; object-fit:cover;">
+                </div>
+            </div>
+
+            <button class="carousel-control-prev" type="button" data-bs-target="#carouselKuLapor" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon"></span>
+            </button>
+
+            <button class="carousel-control-next" type="button" data-bs-target="#carouselKuLapor" data-bs-slide="next">
+                <span class="carousel-control-next-icon"></span>
+            </button>
+
+        </div>
+
+        <!-- Menu Cards -->
+        <div class="dashboard-grid mt-4">
+            <!-- Card 2 -->
+            <div class="menu-card">
+                <div class="menu-header">
+                    <div class="menu-icon-wrapper">
+                        <i class="fas fa-clipboard-list menu-icon"></i>
+                    </div>
+                    <span class="menu-badge">PENGADUAN</span>
+                </div>
+                <div class="menu-content">
+                    <h3 class="menu-title">Riwayat Pengaduan</h3>
+                    <p class="menu-description">Lihat, verifikasi, dan tanggapan dari admin secara real-time.</p>
+                    <a href="data_pengaduan.php" class="menu-link">
+                        Akses Menu <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Card 3 -->
+            <div class="menu-card">
+                <div class="menu-header">
+                    <div class="menu-icon-wrapper">
+                        <i class="fas fa-file-alt"></i>
+                    </div>
+                    <span class="menu-badge">PENGADUAN</span>
+                </div>
+                <div class="menu-content">
+                    <h3 class="menu-title">Membuat Aspirasi</h3>
+                    <p class="menu-description">Membuat sebuah Aspirasi tentang Sekolah.</p>
+                    <a href="form_pengaduan.php" class="menu-link">
+                        Akses Menu <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Card 4 -->
+            <div class="menu-card">
+                <div class="menu-header">
+                    <div class="menu-icon-wrapper">
+                        <i class="fas fa-key"></i>
+                    </div>
+                    <span class="menu-badge">GANTI PASSWORD</span>
+                </div>
+                <div class="menu-content">
+                    <h3 class="menu-title">Ubah Password</h3>
+                    <p class="menu-description">Daftarkan akun siswa baru ke dalam sistem dengan data lengkap dan terverifikasi.</p>
+                    <a href="form_ganti_password.php" class="menu-link">
+                        Akses Menu <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </main>
 </body>
 </html>

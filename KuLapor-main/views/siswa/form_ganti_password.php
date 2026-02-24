@@ -6,6 +6,7 @@ if (!isset($_SESSION['username'])) {
 }
 ?>
 
+
 <!DOCTYPE html>
 <html lang="id">
 <head>
@@ -62,7 +63,7 @@ if (!isset($_SESSION['username'])) {
 <div class="card">
     <h2>Ubah Password</h2>
 
-    <form action="proses_ubah_password.php" method="POST">
+    <form action="../../ControllerSiswa/proses_ganti_password.php" method="POST">
         <input type="password" name="password_lama" placeholder="Password Lama" required>
         <input type="password" name="password_baru" placeholder="Password Baru" required>
         <input type="password" name="konfirmasi_password" placeholder="Konfirmasi Password Baru" required>

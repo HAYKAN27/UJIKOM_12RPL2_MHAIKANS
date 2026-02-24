@@ -71,19 +71,6 @@
             font-style: italic;
         }
         
-        .remember-me {
-            display: flex;
-            align-items: center;
-            margin: 25px 0 30px;
-        }
-        
-        .remember-me input {
-            width: 18px;
-            height: 18px;
-            margin-right: 10px;
-            accent-color: #3f51b5;
-        }
-        
         .remember-me label {
             color: #555;
             font-size: 15px;
@@ -154,12 +141,14 @@
 <body>
     <div class="login-container">
         <form action="proses_login.php" method="post">
+
+            <input type="hidden" name="tipe_login" value="siswa">
             
-            <div class="university-name">KuLapor</div>
+            <div class="university-name">KuLapor - Siswa</div>
             
             <div class="input-group">
-                <label for="username">Username:</label>
-                <input type="text" id="username" name="username" placeholder="ketikkan username anda">
+                <label for="nis">NIS(Nomor Induk Siswa) :</label>
+                <input type="text" id="nis" name="nis" placeholder="ketikkan NIS anda">
             </div>
         
         <div class="input-group">
