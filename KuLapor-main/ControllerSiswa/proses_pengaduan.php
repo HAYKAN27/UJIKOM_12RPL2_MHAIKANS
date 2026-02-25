@@ -17,7 +17,7 @@ if (isset($_POST['kirim'])) {
 
     // Status default
     $status   = "menunggu";
-    $feedback = "";
+    $feedback = NULL ;
 
     // 2. Perintah SQL untuk memasukkan data (INSERT)
     $query = "INSERT INTO input_aspirasi 

@@ -7,117 +7,122 @@
     <title>KULAPOR - SMK Muhammadiyah Cikampek</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
 
-        body {
+body {
+    min-height: 100vh;
+    font-family: 'Segoe UI', sans-serif;
+}
 
-            background: #f5f5f5;
-            min-height: 100vh;
-        }
+/* HEADER MODERN */
+.header {
+    position: absolute;
+    width: 100%;
+    top: 0;
+    left: 0;
+    padding: 20px 40px;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    background: rgba(255,255,255,0.15);
+    backdrop-filter: blur(10px);
+    z-index: 10;
+}
 
-        .header {
-            background: white;
-            padding: 20px 40px;
-            border-bottom: 2px solid #e0e0e0;
-            display: flex;
-            align-items: center;
-            gap: 15px;
-        }
-        .school-name {
-            font-size: 14px;
-            font-weight: 700;
-            color: #333;
-            line-height: 1.4;
-        }
+.school-name {
+    font-size: 14px;
+    font-weight: 700;
+    color: white;
+}
 
-        .main-content {
-            background: white;
-            display: flex;
-            flex-direction: column;
-            height: 100vh;
-            justify-content: center;
-            padding: 60px 40px;
-            text-align: center;
-        }
+/* BACKGROUND */
+.main-content {
+    background-image: url('public/img/SMKMUTU2 (1).jpg'); /* rename gambar tanpa spasi */
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    justify-content: center;
+    padding: 60px 40px;
+    text-align: center;
+    position: relative;
+}
 
-        h1 {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            font-size: 80px;
-            font-weight: 900;
-            color: #000;
-            margin-bottom: 20px;
-            letter-spacing: -2px;
-        }
+/* OVERLAY */
+.main-content::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(rgba(0,0,0,.55), rgba(0,0,0,.65));
+}
 
-        .subtitle {
-            font-size: 18px;
-            color: #333;
-            margin-bottom: 60px;
-            font-weight: 600;
-        }
+/* CONTENT */
+.main-content * {
+    position: relative;
+    z-index: 2;
+    color: white;
+}
 
-        .button-group {
-            display: flex;
-            gap: 25px;
-            justify-content: center;
-            align-items: center;
-            flex-wrap: wrap;
-            margin-bottom: 20px;
-        }
+/* TITLE */
+h1 {
+    font-size: 95px;
+    font-weight: 900;
+    letter-spacing: 6px;
+    animation: fadeDown 1s ease;
+}
 
-        .btn {
-            padding: 16px 45px;
-            font-size: 16px;
-            font-weight: 400;
-            border: 3px solid #000;
-            border-radius: 10px;
+.subtitle {
+    font-size: 20px;
+    margin-bottom: 50px;
+    opacity: .9;
+    animation: fadeUp 1.2s ease;
+}
 
-            transition: all 0.3s;
-            text-decoration: none;
-            display: inline-block;
-        }
+/* BUTTON */
+.button-group {
+    display: flex;
+    gap: 25px;
+    justify-content: center;
+    flex-wrap: wrap;
+    animation: fadeUp 1.4s ease;
+}
 
-        .btn-primary {
-            background: #000;
-            color: white;
-        }
+.btn {
+    padding: 16px 50px;
+    border-radius: 12px;
+    border: 2px solid rgba(255,255,255,.6);
+    backdrop-filter: blur(6px);
+    color: white;
+    transition: .3s;
+}
 
-        .btn-primary:hover {
-            background: #333;
-            transform: scale(1.05);
-        }
+.btn-primary {
+    background: rgba(0,0,0,.6);
+}
 
-        .btn-secondary {
-            background: white;
-            color: #000;
-        }
+.btn:hover {
+    transform: translateY(-5px) scale(1.05);
+    background: rgba(255,255,255,.2);
+}
 
-        .btn-secondary:hover {
-            background: #f5f5f5;
-            transform: scale(1.05);
-        }
+/* ANIMATION */
+@keyframes fadeDown {
+    from {opacity:0; transform: translateY(-40px);}
+    to {opacity:1; transform: translateY(0);}
+}
 
-        .help-text {
-            font-size: 14px;
-            color: #666;
-            margin-top: 15px;
-        }
-
-        .help-text a {
-            color: #1e40af;
-            text-decoration: none;
-            font-weight: 600;
-        }
-
-        .help-text a:hover {
-            text-decoration: underline;
-        }
-    </style>
+@keyframes fadeUp {
+    from {opacity:0; transform: translateY(40px);}
+    to {opacity:1; transform: translateY(0);}
+}   
+</style>
 </head>
 
 <body>
@@ -132,32 +137,47 @@
     <div class="main-content">
         <h1>KULAPOR</h1>
         <p class="subtitle">"Solusi Digital Pelaporan Sarana dan Prasarana Sekolah"</p>
+        
 
         <div class="button-group">
-            <a href="login.php" class="btn btn-primary">Masuk akun</a>
-            <button type="button" class="btn " data-bs-toggle="modal" data-bs-target="#exampleModal">
+            <a href="role_page.php" class="btn">Masuk sebagai</a>
+            <button type="button" class="btn " data-bs-toggle="modal" data-bs-target="#panduanModal">
                 Panduan Pengaduan
             </button>
-
-            <!-- Modal bawaan dari bootstrap -->
-            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                        </div>
-                        <div class="modal-body">
-                            ...
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                            <button type="button" class="btn btn-primary">Save changes</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
         </div>
+   
+        </div>
+    </div>
+
+         <div class="modal fade" id="panduanModal" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+
+            <!-- Header -->
+            <div class="modal-header">
+                <h5 class="modal-title">
+                    <i class="bi bi-info-circle"></i> Panduan Membuat Laporan
+                </h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+
+            <div class="modal-body">
+
+                <ol>
+                    <li>Login menggunakan akun siswa.</li>
+                    <li>Pilih menu <b>Buat Pengaduan</b>.</li>
+                    <li>Isi judul dan isi laporan dengan jelas.</li>
+                    <li>Klik tombol <b>Kirim</b>.</li>
+                    <li>Tunggu admin memproses laporan kamu.</li>
+                </ol>
+
+                <div class="alert alert-warning mt-3">
+                    Pastikan laporan yang dikirim valid dan tidak mengandung unsur spam.
+                </div>
+
+            </div>
+
+</div>
     </div>
 </body>
 
