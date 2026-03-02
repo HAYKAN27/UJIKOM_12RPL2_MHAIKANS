@@ -2,7 +2,7 @@
 include '../../config/koneksi.php';
 session_start();
 
-if (!isset($_SESSION['username'])) {
+if (!isset($_SESSION['role']) || $_SESSION['role'] != 'siswa') {
     header("Location: ../../login_siswa.php");
     exit;
 }
@@ -379,7 +379,7 @@ $nama = $_SESSION['username'];
         <!-- Page Header -->
         <div class="page-header">
             <h1 class="page-title">HALO SELAMAT DATANG KEMBALI <?= $nama ?>!</h1>
-            <p class="page-subtitle">Kelola sistem pengaduan dan data siswa secara terpusat</p>
+            <p class="page-subtitle">Membuat pengaduan saranan SMK TI MUHAMMADIYAH CIKAMPEK Melalui Website KULAPOR</p>
         </div>
         <!-- Carousel -->
         <div id="carouselKuLapor" class="carousel slide mt-3" data-bs-ride="carousel">
@@ -387,7 +387,6 @@ $nama = $_SESSION['username'];
             <div class="carousel-indicators">
                 <button type="button" data-bs-target="#carouselKuLapor" data-bs-slide-to="0" class="active"></button>
                 <button type="button" data-bs-target="#carouselKuLapor" data-bs-slide-to="1"></button>
-                <button type="button" data-bs-target="#carouselKuLapor" data-bs-slide-to="2"></button>
             </div>
 
             <div class="carousel-inner rounded shadow">
@@ -419,10 +418,10 @@ $nama = $_SESSION['username'];
                     <div class="menu-icon-wrapper">
                         <i class="fas fa-clipboard-list menu-icon"></i>
                     </div>
-                    <span class="menu-badge">PENGADUAN</span>
+                    <span class="menu-badge">DATA PENGADUAN</span>
                 </div>
                 <div class="menu-content">
-                    <h3 class="menu-title">Riwayat Pengaduan</h3>
+                    <h3 class="menu-title">Riwayat Pengaduan Anda</h3>
                     <p class="menu-description">Lihat, verifikasi, dan tanggapan dari admin secara real-time.</p>
                     <a href="data_pengaduan.php" class="menu-link">
                         Akses Menu <i class="fas fa-arrow-right"></i>
@@ -439,7 +438,7 @@ $nama = $_SESSION['username'];
                     <span class="menu-badge">PENGADUAN</span>
                 </div>
                 <div class="menu-content">
-                    <h3 class="menu-title">Membuat Aspirasi</h3>
+                    <h3 class="menu-title">Membuat Pengaduan</h3>
                     <p class="menu-description">Membuat sebuah Aspirasi tentang Sekolah.</p>
                     <a href="form_pengaduan.php" class="menu-link">
                         Akses Menu <i class="fas fa-arrow-right"></i>

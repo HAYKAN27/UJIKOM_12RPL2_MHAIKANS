@@ -44,16 +44,13 @@ body {
 }
 .close a{
     backdrop-filter: blur(6px);
-    color: whitesmoke;
-    font-weight: 500;
-    text-decoration: none;
+    color: white;
+    font-weight: 800;
     padding: 10px 10px 5px ;
     border: 2px solid gray;
     border-radius: 4px;
 }
-.close a:hover{
 
-}
 
 .school-name {
     width: 50%;

@@ -1,3 +1,33 @@
+<?php
+            include '../../config/koneksi.php';
+
+            // 2. Baru cek ID
+            if (!isset($_GET['id'])) {
+                echo "ID tidak ditemukan.";
+                exit;
+            }
+
+            $id = $_GET['id'];
+
+            // Ambil data berdasarkan id yang dipilih
+            $query = mysqli_query($koneksi, "
+                SELECT input_aspirasi.*, kategori.ket_kategori
+                FROM input_aspirasi
+                JOIN kategori 
+                ON input_aspirasi.id_kategori = kategori.id_kategori
+                WHERE input_aspirasi.id_pelapor = '$id'
+            ") or die(mysqli_error($koneksi));
+
+            $row = mysqli_fetch_assoc($query);
+
+            // Jika data tidak ditemukan
+            if (!$row) {
+                echo "Data tidak ditemukan.";
+                exit;
+            }
+            
+?>
+
 <!DOCTYPE html>
 <html lang="id">
 <head>
@@ -6,7 +36,7 @@
     <style>
         body {
             font-family: Arial, sans-serif;
-            background-color: #f4f4f4;
+            background-color: #ffffff;
             margin: 0;
             padding: 20px;
 
@@ -79,34 +109,7 @@
     </style>
 </head>
 <body>
-                <?php
-            include '../../config/koneksi.php';
 
-            // Cek apakah ada id di URL
-            if (!isset($_GET['id'])) {
-                echo "ID tidak ditemukan.";
-                exit;
-            }
-
-            $id = $_GET['id'];
-
-            // Ambil data berdasarkan id yang dipilih
-            $query = mysqli_query($koneksi, "
-                SELECT input_aspirasi.*, kategori.ket_kategori
-                FROM input_aspirasi
-                JOIN kategori 
-                ON input_aspirasi.id_kategori = kategori.id_kategori
-                WHERE input_aspirasi.id_pelapor = '$id'
-            ") or die(mysqli_error($koneksi));
-
-            $row = mysqli_fetch_assoc($query);
-
-            // Jika data tidak ditemukan
-            if (!$row) {
-                echo "Data tidak ditemukan.";
-                exit;
-            }
-            ?>
 
     
     <div class="navbar">    

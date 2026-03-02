@@ -1,14 +1,13 @@
 <?php
+include '../../config/koneksi.php';
 session_start();
 
-include '../../config/koneksi.php' ;
-
-if (!isset($_SESSION['nis'])) {
-    header("Location: /PROJECT-UJIKOM/Kulapor-main/login.php");
+if (!isset($_SESSION['role']) || $_SESSION['role'] != 'siswa') {
+    header("Location: ../../login_siswa.php");
     exit;
-
-
 }
+
+
 
 $nis = $_SESSION['nis'];
 
@@ -142,7 +141,7 @@ $nis = $_SESSION['nis'];
                     <label for="kategori">Kategori</label>
 
                     <select name="id_kategori" id="kategori">
-                        <option value="">-- Pilih Kategori --</option>
+                        <option value="" required>-- Pilih Kategori --</option>
 
                         <?php
                         $kategori = mysqli_query($koneksi, "SELECT * FROM kategori");
@@ -156,20 +155,20 @@ $nis = $_SESSION['nis'];
 
             <div class="form-group">
                 <label for="lokasi">Lokasi</label>
-                <input type="text" id="lokasi" name="lokasi" placeholder="di Kantin belakang">
+                <input type="text" id="lokasi" name="lokasi" placeholder="di Kantin belakang" required>
             </div>
 
             <div class="form-group">
                 <label for="tanggal">Tanggal</label>
-                <input type="date" id="tanggal" name="tanggal">
+                <input type="date" id="tanggal" name="tanggal" required>
             </div>
 
             <div class="form-group">
                 <label for="keterangan">Keterangan</label>
-                <textarea id="keterangan" name="keterangan" placeholder="Jelaskan pengaduan Anda secara detail..."></textarea>
+                <textarea id="keterangan" name="keterangan" placeholder="Jelaskan pengaduan Anda secara detail..." required></textarea>
             </div>
 
-            <button type="submit" name="kirim">Kirim</button>
+            <button type="submit">Kirim</button>   
         </form>
     </div>
 </body>

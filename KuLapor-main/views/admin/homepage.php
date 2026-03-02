@@ -1,7 +1,12 @@
 <?php
 session_start();
 
+if (!isset($_SESSION['role']) || $_SESSION['role'] != 'admin') {
+    header("Location: ../../login_admin.php");
+    exit;
+}
 
+$username = $_SESSION['username'];
 ?>
 
 <!DOCTYPE html>
@@ -62,11 +67,7 @@ session_start();
             justify-content: space-between;
         }
 
-        .header-left {
-            display: flex;
-            align-items: center;
-            gap: 32px;
-        }
+
 
         .brand {
             display: flex;
@@ -205,7 +206,7 @@ session_start();
         /* Dashboard Grid */
         .dashboard-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
             gap: 24px;
             margin-bottom: 32px;
         }
@@ -335,10 +336,7 @@ session_start();
     <header class="header">
         <div class="header-container">
             <div class="header-left">
-                <a href="#" class="brand">
-                    <div class="brand-logo">
-                        <i class="fas fa-shield-alt"></i>
-                    </div>
+                <a href="" class="brand">
                     <span class="brand-text">KULAPOR</span>
                 </a>
             </div>
@@ -347,7 +345,7 @@ session_start();
                     <img src="https://secure.gravatar.com/avatar/d194c6c98a5041637d4006baddfa05cb?s=128&d=mm&r=g" alt="Admin Avatar" class="user-avatar">
                     <div class="user-details">
                         <div class="user-role">Administrator</div>
-                        <div class="user-name">Admin</div>
+                        <div class="user-name"><?= $username?></div>
                     </div>
                 </div>
                 <button class="btn-logout">
@@ -437,6 +435,22 @@ session_start();
                     <h3 class="menu-title">Membuat Akun</h3>
                     <p class="menu-description">Daftarkan akun siswa baru ke dalam sistem dengan data lengkap dan terverifikasi.</p>
                     <a href="form_add_siswa.php" class="menu-link">
+                        Akses Menu <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
+            </div>
+            <!-- Card 4 -->
+            <div class="menu-card">
+                <div class="menu-header">
+                    <div class="menu-icon-wrapper">
+                        <i class="fas fa-key"></i>
+                    </div>
+                    <span class="menu-badge">PASSWORD BARU</span>
+                </div>
+                <div class="menu-content">
+                    <h3 class="menu-title">Ganti Password Akun </h3>
+                    <p class="menu-description">Ubah Password Anda </p>
+                    <a href="form_ganti_password.php" class="menu-link">
                         Akses Menu <i class="fas fa-arrow-right"></i>
                     </a>
                 </div>

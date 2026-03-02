@@ -1,6 +1,11 @@
 <?php
 session_start();
 
+
+            if (!isset($_SESSION['role']) || $_SESSION['role'] != 'admin') {
+                header("Location: ../../login_admin.php");
+                exit;
+            }
 ?>
 
 <!DOCTYPE html>
@@ -233,22 +238,6 @@ session_start();
             justify-content: center;
             font-size: 16px;
         }
-
-        .stat-icon.pending {
-            background: #FEF3C7;
-            color: #D97706;
-        }
-
-        .stat-icon.process {
-            background: #DBEAFE;
-            color: #0284C7;
-        }
-
-        .stat-icon.done {
-            background: #D1FAE5;
-            color: #059669;
-        }
-
         .stat-value {
             font-family: 'Roboto', sans-serif;
             font-size: 28px;
@@ -428,6 +417,11 @@ session_start();
         .status-selesai {
             background: #D1FAE5;
             color: #065F46;
+        }
+
+        .status-ditolak{
+            background: #ff4b4b;
+            color: #000000;
         }
 
         /* Action Buttons */
@@ -649,10 +643,7 @@ session_start();
             </div>
             <div class="table-wrapper">
                 <table id="datatable" class="display">
-                <div style="margin-bottom:10px;">
-                    Dari : <input type="date" id="min">
-                    Sampai : <input type="date" id="max">
-                </div>
+
 
                     <thead>
                         <tr>
@@ -660,6 +651,7 @@ session_start();
                             <th>Nama Siswa</th>
                             <th>Kelas</th>
                             <th>Kategori</th>
+                            <th>Tanggal</th>
                             <th>Status</th>
                             <th>Aksi</th>
                         </tr>
@@ -685,6 +677,9 @@ session_start();
             } elseif ($status == 'selesai') {
                 $status_class = 'status-selesai';
                 $status_icon  = 'fa-check';
+            }elseif ($status == 'ditolak') {
+                $status_class = 'status-ditolak';
+                $status_icon  = 'fa-times';
             }
     ?>
         <tr>
@@ -692,6 +687,7 @@ session_start();
             <td><strong><?= $row['username']; ?></strong></td>
             <td><?= $row['kelas']; ?></td>
             <td><?= $row['ket_kategori']; ?></td>
+            <td><?= $row['tanggal']; ?></td>
 
             <td>
                 <span class="status-badge <?= $status_class; ?>">

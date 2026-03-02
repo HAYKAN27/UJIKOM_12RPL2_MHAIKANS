@@ -1,3 +1,14 @@
+<?php
+include '../../config/koneksi.php';
+session_start();
+
+if (!isset($_SESSION['role']) || $_SESSION['role'] != 'siswa') {
+    header("Location: ../../login_siswa.php");
+    exit;
+}
+
+?>
+
 <!DOCTYPE html>
 <html lang="id">
 <head>
@@ -80,13 +91,6 @@
 </head>
 <body>
                 <?php
-            include '../../config/koneksi.php';
-
-            // Cek apakah ada id di URL
-            if (!isset($_GET['id'])) {
-                echo "ID tidak ditemukan.";
-                exit;
-            }
 
             $id = $_GET['id'];
 
@@ -97,7 +101,7 @@
                 JOIN kategori 
                 ON input_aspirasi.id_kategori = kategori.id_kategori
                 WHERE input_aspirasi.id_pelapor = '$id'
-            ") or die(mysqli_error($koneksi));
+            ");
 
             $row = mysqli_fetch_assoc($query);
 
