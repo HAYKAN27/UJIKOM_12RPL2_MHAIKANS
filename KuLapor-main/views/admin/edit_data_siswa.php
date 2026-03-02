@@ -1,35 +1,66 @@
 
-        <?php
-        include '../../config/koneksi.php';
+ <?php
+session_start();
+include '../../config/koneksi.php';
 
-        // 1. Ambil ID dari link "edit"
-        $id = $_GET['id'];
+if (!isset($_SESSION['role']) || $_SESSION['role'] != 'admin') {
+    header("Location: ../../login_admin.php");
+    exit;
+}
 
-        // 2. Jika tombol update ditekan
-        if (isset($_POST['update'])) {
+$id = $_GET['id'];
 
-            $nis   = $_POST['nis'];
-            $nama = $_POST['nama'];
-            $password = $_POST['password'];
-            $kelas = $_POST['kelas'];
+$query = mysqli_query($koneksi, "SELECT * FROM user WHERE id='$id'");
+$data = mysqli_fetch_assoc($query);
 
-            // Query UPDATE
-            $update = mysqli_query($koneksi, "
-                UPDATE `user`
-                SET nis='$nis', Username='$nama',kelas='$kelas', password='$password' 
+if (isset($_POST['update'])) {
+
+    $nis = $_POST['nis'];
+    $nama = $_POST['nama'];
+    $kelas = $_POST['kelas'];
+    $password = $_POST['password'];
+
+    // 🔴 validasi tidak boleh kosong
+    if ($nis == "" || $nama == "" || $kelas == "") {
+
+        echo "<script>
+                alert('NIS, Nama, dan Kelas tidak boleh kosong!');
+                window.history.back();
+              </script>";
+
+    } else {
+
+        // kalau password diisi
+        if ($password != "") {
+
+            mysqli_query($koneksi, "
+                UPDATE user 
+                SET nis='$nis',
+                    Username='$nama',
+                    kelas='$kelas',
+                    password='$password'
                 WHERE id='$id'
             ");
 
-            if ($update) {
-                echo "<script>
-                        alert('Data berhasil di update!');
-                        window.location='data_siswa.php';
-              </script>";
-            } else {
-                echo "Gagal update data : " . mysqli_error($koneksi);
-            }
+        } else {
+
+            // kalau password kosong
+            mysqli_query($koneksi, "
+                UPDATE user 
+                SET nis='$nis',
+                    Username='$nama',
+                    kelas='$kelas'
+                WHERE id='$id'
+            ");
         }
-        ?>
+
+        echo "<script>
+                alert('Data berhasil diupdate');
+                window.location='data_siswa.php';
+              </script>";
+    }
+}
+?>
 <!DOCTYPE html>
 <html lang="id">
 <head>
@@ -214,6 +245,7 @@
                     <input 
                         type="text" 
                         name="nis" 
+                        value="<?= $data['nis']; ?>"
                         class="form-control" 
                         placeholder="Masukkan NIS" 
                         required
@@ -228,6 +260,7 @@
                     <input 
                         type="text" 
                         name="nama" 
+                        value="<?= $data['Username']; ?>"
                         class="form-control" 
                         placeholder="Masukkan nama lengkap" 
                         required
@@ -239,15 +272,15 @@
                     <label class="form-label">
                         Kelas <span class="required">*</span>
                     </label>
-                    <select name="kelas" class="form-control form-select" required>
-                        <option value="">-- Pilih Kelas -- </option>
-                        <option value="12 RPL 1">12 RPL 1</option>
-                        <option value="12 RPL 2">12 RPL2</option>
-                        <option value="12 TKJ 1">12 TKJ 1</option>
-                        <option value="12 TKJ 3">12 TKJ 2</option>
-                        <option value="12 TKJ 3">12 TKJ 3</option>
-                        <option value="12 TKJ SAMSUNG">12 TKJ SAMSUNG</option>
-                    </select>
+                        <select name="kelas" class="form-control form-select" required>
+                            <option value="">-- Pilih Kelas --</option>
+                            <option value="12 RPL 1" <?= ($data['kelas']=="12 RPL 1")?"selected":""; ?>>12 RPL 1</option>
+                            <option value="12 RPL 2" <?= ($data['kelas']=="12 RPL 2")?"selected":""; ?>>12 RPL 2</option>
+                            <option value="12 TKJ 1" <?= ($data['kelas']=="12 TKJ 1")?"selected":""; ?>>12 TKJ 1</option>
+                            <option value="12 TKJ 2" <?= ($data['kelas']=="12 TKJ 2")?"selected":""; ?>>12 TKJ 2</option>
+                            <option value="12 TKJ 3" <?= ($data['kelas']=="12 TKJ 3")?"selected":""; ?>>12 TKJ 3</option>
+                            <option value="12 TKJ SAMSUNG" <?= ($data['kelas']=="12 TKJ SAMSUNG")?"selected":""; ?>>12 TKJ SAMSUNG</option>
+                        </select>
                 </div>
 
                 <!-- Password -->
@@ -258,6 +291,7 @@
                     <input 
                         type="password" 
                         name="password" 
+                        value="<?= $data['password']; ?>"
                         class="form-control" 
                         placeholder="Kosongkan jika tidak ingin mengubah"
                     >

@@ -11,6 +11,8 @@
         :root {
             --primary-blue: #0C4A6E;
             --secondary-blue: #0284C7;
+            --accent-blue: #0EA5E9;
+            --light-blue: #E0F2FE;
             --white: #FFFFFF;
             --gray-50: #F9FAFB;
             --gray-100: #F3F4F6;
@@ -19,6 +21,9 @@
             --gray-600: #4B5563;
             --gray-700: #374151;
             --gray-900: #111827;
+            --success: #059669;
+            --warning: #D97706;
+            --danger: #DC2626;
         }
 
         * {
@@ -214,7 +219,7 @@ if (isset($_POST['update'])) {
         echo "<script>
                 alert('Feedback berhasil disimpan!');
                 window.location='data_pengaduan.php';
-              </script>";
+              </script>";   
     } else {
         echo "Gagal update data : " . mysqli_error($koneksi);
     }
@@ -248,6 +253,7 @@ if (isset($_POST['update'])) {
             <option value="menunggu">Menunggu</option>
             <option value="proses">Proses</option>
             <option value="selesai">Selesai</option>
+            <option value="ditolak">Ditolak</option>
         </select>
         
         <br><br>

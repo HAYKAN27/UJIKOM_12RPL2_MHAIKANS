@@ -3,8 +3,6 @@
 include '../config/koneksi.php';
 session_start();
 
-if (isset($_POST['kirim'])) {
-
     // 1. Tangkap data dari form
     $id_kategori = $_POST['id_kategori'];
     $lokasi      = $_POST['lokasi'];
@@ -17,13 +15,12 @@ if (isset($_POST['kirim'])) {
 
     // Status default
     $status   = "menunggu";
-    $feedback = NULL ;
 
     // 2. Perintah SQL untuk memasukkan data (INSERT)
     $query = "INSERT INTO input_aspirasi 
               (nis, id_kategori, lokasi, ket, status, feedback,tanggal)
               VALUES 
-              ('$nis', '$id_kategori', '$lokasi', '$ket', '$status', '$feedback','$tanggal')";
+              ('$nis', '$id_kategori', '$lokasi', '$ket', '$status', NULL ,'$tanggal')";
 
     // 3. Jalankan query
     $simpan = mysqli_query($koneksi, $query);
@@ -36,5 +33,5 @@ if (isset($_POST['kirim'])) {
     } else {
         echo "Gagal mengirim laporan: " . mysqli_error($koneksi);
     }
-}
+    
 ?>

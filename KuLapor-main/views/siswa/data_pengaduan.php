@@ -1,9 +1,12 @@
 <?php
+include '../../ControllerSiswa/data_anda.php';
 
-include '../../ControllerSiswa/data_anda.php';  
+if (!isset($_SESSION['role']) || $_SESSION['role'] != 'siswa') {
+    header("Location: ../../login_siswa.php");
+    exit;
+}
 // ambil nis dari session
 $nis = $_SESSION['nis'];
-
 
 
 ?>
@@ -391,7 +394,7 @@ $nis = $_SESSION['nis'];
 
         #datatable tbody td {
             padding: 16px;
-            font-size: 14px;
+            font-size: 16px;
             color: var(--gray-900);
             border-bottom: 1px solid var(--gray-200);
             vertical-align: middle;
@@ -412,13 +415,13 @@ $nis = $_SESSION['nis'];
             gap: 6px;
             padding: 6px 12px;
             border-radius: 6px;
-            font-size: 12px;
+            font-size: 20px;
             font-weight: 600;
             text-transform: capitalize;
         }
 
         .status-badge i {
-            font-size: 10px;
+            font-size: 15px;
         }
 
         .status-pending {
@@ -426,14 +429,17 @@ $nis = $_SESSION['nis'];
             color: #92400E;
         }
 
-        .status-ditanggapi {
-            background: #DBEAFE;
-            color: #1E40AF;
-        }
-
         .status-selesai {
             background: #D1FAE5;
             color: #065F46;
+        }
+        .status-ditolak{
+            background: #ff4b4b;
+            color: #000000;
+        }
+        .status-proses{
+            background: #ffffff;
+            color: #000000;
         }
 
         /* Action Buttons */
@@ -643,8 +649,8 @@ $nis = $_SESSION['nis'];
         <!-- Page Header -->
         <div class="page-header">
             <div class="page-title-section">
-                <h1>Data Pengaduan</h1>
-                <p class="page-subtitle">Kelola dan tanggapi pengaduan siswa</p>
+                <h1>Riwayat Laporan Anda</h1>
+                <p class="page-subtitle">Melihat respon dan data data yang sudah anda input</p>
             </div>
         </div>
         
@@ -663,6 +669,7 @@ $nis = $_SESSION['nis'];
                             <th>Nama Siswa</th>
                             <th>Kelas</th>
                             <th>Kategori</th>
+                            <th>Tanggal</th>
                             <th>Status</th>
                             <th>Aksi</th>
                         </tr>
@@ -674,13 +681,36 @@ $nis = $_SESSION['nis'];
                     <?php
                     $no = 1;
                     while ($row = mysqli_fetch_assoc($query)) {
+                        
+                            $status = strtolower($row['status']);
+                            $status_class = 'status-pending';
+                            $status_icon  = 'fa-clock';
+
+                            if ($status == 'proses') {
+                                $status_class = 'status-proses';
+                                $status_icon  = 'fa-spinner';
+                                
+                            } elseif ($status == 'selesai') {
+                                $status_class = 'status-selesai';
+                                $status_icon  = 'fa-check';
+
+                            }elseif ($status == 'ditolak') {
+                            $status_class = 'status-ditolak';
+                            $status_icon  = 'fa-times';
+                        }
                     ?>
                     <tr>
                         <td><?= $no++; ?></td>
                         <td><?= $row['Username']; ?></td>
                         <td><?= $row['kelas']; ?></td>
                         <td><?= $row['ket_kategori']; ?></td>
-                        <td><?= $row['status']; ?></td>
+                        <td><?= $row['tanggal']; ?></td>
+                        <td>
+                            <span class="badge <?= $status_class; ?>">
+                                <i class="fas <?= $status_icon; ?>"></i>
+                                <?= ucfirst($row['status']); ?>
+                            </span>
+                        </td>
                         <td>
                             <a href="detail_pengaduan.php?id=<?= $row['id_pelapor']; ?>" class="btn-action btn-detail">
                                 <i class='fas fa-eye'></i>

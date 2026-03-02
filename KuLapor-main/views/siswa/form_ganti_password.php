@@ -1,8 +1,10 @@
 <?php
+include '../../config/koneksi.php';
 session_start();
-if (!isset($_SESSION['username'])) {
-    header("Location: login.php");
-    exit();
+
+if (!isset($_SESSION['role']) || $_SESSION['role'] != 'siswa') {
+    header("Location: ../../login_siswa.php");
+    exit;
 }
 ?>
 
@@ -25,6 +27,7 @@ if (!isset($_SESSION['username'])) {
         .card {
             background: white;
             padding: 30px;
+            height: 400px;
             width: 400px;
             border-radius: 10px;
             box-shadow: 0 10px 25px rgba(0,0,0,0.2);
@@ -67,7 +70,7 @@ if (!isset($_SESSION['username'])) {
         <input type="password" name="password_lama" placeholder="Password Lama" required>
         <input type="password" name="password_baru" placeholder="Password Baru" required>
         <input type="password" name="konfirmasi_password" placeholder="Konfirmasi Password Baru" required>
-        <button type="submit" name="ubah">Simpan Perubahan</button>
+        <button type="submit">Simpan Perubahan</button>
     </form>
 </div>
 

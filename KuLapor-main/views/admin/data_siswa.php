@@ -3,6 +3,11 @@
                     
                     include '../../config/koneksi.php';
 
+                    if (!isset($_SESSION['username'])) {
+                    header("Location: ../../login_admin.php");
+                    exit;
+                    }
+
                     $no = 1;
 
                     // ambil semua data siswa

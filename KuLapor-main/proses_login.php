@@ -11,8 +11,7 @@ if ($tipe == 'admin') {
 
     $query = mysqli_query($koneksi, "
         SELECT * FROM user 
-        WHERE Username='$username' 
-        AND password='$password'
+        WHERE Username='$username'
     ");
 
 } elseif ($tipe == 'siswa') {
@@ -21,12 +20,31 @@ if ($tipe == 'admin') {
 
     $query = mysqli_query($koneksi, "
         SELECT * FROM user 
-        WHERE nis='$nis' 
-        AND password='$password'
+        WHERE nis='$nis'
     ");
 }
 
 $data = mysqli_fetch_assoc($query);
+
+// Cek user ada atau tidak
+if (!$data) {
+    echo "<script>
+            alert('Username / NIS tidak ditemukan');
+            window.history.back();
+          </script>";
+    exit;
+}
+
+// Cek password
+if ($data['password'] != $password) {
+    echo "<script>
+            alert('Password salah');
+            window.history.back();
+          </script>";
+    exit;
+}
+
+
 
 if ($data) {
 
