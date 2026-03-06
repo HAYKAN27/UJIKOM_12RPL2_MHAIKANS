@@ -111,7 +111,7 @@ if (!isset($_SESSION['role']) || $_SESSION['role'] != 'siswa') {
                 exit;
             }
             ?>
-
+    
     
     <div class="navbar">    
         <a href="data_pengaduan.php">Kembali ke Data Pengaduan</a>
@@ -141,6 +141,10 @@ if (!isset($_SESSION['role']) || $_SESSION['role'] != 'siswa') {
         <div class="detail-item">
             <span class="detail-label">ID Pengaduan:</span>
             <span class="detail-value"><?= $row['id_pelapor']; ?></span>
+        </div>
+        <div class="detail-item">
+            <span class="detail-label">Status :</span>
+            <span class="detail-value"><?= $row['status']; ?></span>
         </div>
         <div class="detail-item keterangan">
             <span class="detail-label">Keterangan:</span>

@@ -148,12 +148,12 @@
             
             <div class="input-group">
                 <label for="nis">NIS(Nomor Induk Siswa) :</label>
-                <input type="text" id="nis" name="nis" placeholder="ketikkan NIS anda">
+                <input type="text" id="nis" name="nis" placeholder="ketikkan NIS anda" required>
             </div>
         
         <div class="input-group">
             <label for="password">Password:</label>
-            <input type="password" id="password" name="password" placeholder="ketikkan password anda">
+            <input type="password" id="password" name="password" placeholder="ketikkan password anda" required>
         </div>
     
         <button class="login-button">LOGIN</button>

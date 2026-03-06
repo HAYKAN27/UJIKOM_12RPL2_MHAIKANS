@@ -1,9 +1,12 @@
 <!DOCTYPE html>
 <html lang="id">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>KuLapor - LoginPage</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
     <style>
         * {
             margin: 0;
@@ -11,7 +14,7 @@
             box-sizing: border-box;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
-        
+
         body {
             background-color: #f5f5f5;
             display: flex;
@@ -20,7 +23,7 @@
             min-height: 100vh;
             padding: 20px;
         }
-        
+
         .login-container {
             background-color: white;
             border-radius: 10px;
@@ -30,7 +33,7 @@
             padding: 40px 35px;
             text-align: center;
         }
-        
+
         .university-name {
             color: #000000;
             font-size: 24px;
@@ -38,12 +41,12 @@
             margin-bottom: 30px;
             letter-spacing: 0.5px;
         }
-        
+
         .input-group {
             margin-bottom: 20px;
             text-align: left;
         }
-        
+
         .input-group label {
             display: block;
             color: #333;
@@ -51,7 +54,7 @@
             font-weight: 600;
             margin-bottom: 8px;
         }
-        
+
         .input-group input {
             width: 100%;
             padding: 14px;
@@ -60,23 +63,23 @@
             font-size: 15px;
             transition: border-color 0.3s;
         }
-        
+
         .input-group input:focus {
             border-color: #3f51b5;
             outline: none;
         }
-        
+
         .input-group input::placeholder {
             color: #aaa;
             font-style: italic;
         }
-        
+
         .remember-me label {
             color: #555;
             font-size: 15px;
             cursor: pointer;
         }
-        
+
         .login-button {
             background-color: #3f51b5;
             color: white;
@@ -90,76 +93,78 @@
             transition: background-color 0.3s;
             margin-bottom: 25px;
         }
-        
+
         .login-button:hover {
             background-color: #303f9f;
         }
-        
+
         .links {
             display: flex;
             flex-direction: column;
             gap: 12px;
             margin-top: 20px;
         }
-        
+
         .link-item {
             color: #3f51b5;
             text-decoration: none;
             font-size: 14.5px;
             transition: color 0.2s;
         }
-        
+
         .link-item:hover {
             color: #1a237e;
             text-decoration: underline;
         }
-        
+
         .separator {
             height: 1px;
             background-color: #eee;
             margin: 10px 0;
         }
-        
+
         .footer {
             margin-top: 30px;
             color: #777;
             font-size: 12px;
             font-style: italic;
-        }   
-        
+        }
+
         @media (max-width: 480px) {
             .login-container {
                 padding: 30px 25px;
             }
-            
+
             .university-name {
                 font-size: 22px;
             }
         }
     </style>
 </head>
+
 <body>
-    <div class="login-container">
+    <div class="login-container">   
         <form action="proses_login.php" method="post">
 
             <input type="hidden" name="tipe_login" value="admin">
-            
+
             <div class="university-name">KuLapor - ADMIN</div>
-            
+
             <div class="input-group">
                 <label for="username">Username :</label>
-                <input type="text" id="username" name="username" placeholder="ketikkan username anda">
+                <input type="text" id="username" name="username" placeholder="ketikkan username anda" required>
             </div>
-        
-        <div class="input-group">
-            <label for="password">Password:</label>
-            <input type="password" id="password" name="password" placeholder="ketikkan password anda">
-        </div>
-    
-        <button class="login-button">LOGIN</button>
-        
-        <div class="separator"></div>
+
+            <div class="input-group">
+                <label for="password">Password:</label>
+                <input type="password" id="password" name="password" placeholder="ketikkan password anda" required>
+            </div>
+
+            <button class="login-button">LOGIN</button>
+
+            <div class="separator"></div>
     </div>
-</form>
+    </form>
 </body>
+
 </html>
