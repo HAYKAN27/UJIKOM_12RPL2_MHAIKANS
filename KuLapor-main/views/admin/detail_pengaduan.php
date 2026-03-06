@@ -58,10 +58,9 @@
             margin-bottom: 20px;
         }
         .navbar a {
-            text-decoration: none;
             font-weight: bold;
+             
             padding: 5px 10px;
-            border: 1px solid #000000;
             border-radius: 4px;
             transition: background-color 0.3s;
         }

@@ -345,9 +345,6 @@ $nama = $_SESSION['username'];
         <div class="header-container">
             <div class="header-left">
                 <a href="#" class="brand">
-                    <div class="brand-logo">
-                        <i class="fas fa-shield-alt"></i>
-                    </div>
                     <span class="brand-text">KULAPOR</span>
                 </a>
             </div>

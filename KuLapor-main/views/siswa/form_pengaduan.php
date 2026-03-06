@@ -140,8 +140,8 @@ $nis = $_SESSION['nis'];
                 <div class="form-group">
                     <label for="kategori">Kategori</label>
 
-                    <select name="id_kategori" id="kategori">
-                        <option value="" required>-- Pilih Kategori --</option>
+                    <select name="id_kategori" id="kategori" required >
+                        <option value="">-- Pilih Kategori --</option>
 
                         <?php
                         $kategori = mysqli_query($koneksi, "SELECT * FROM kategori");

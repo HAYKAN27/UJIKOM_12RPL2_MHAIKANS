@@ -638,9 +638,6 @@
                         <header class="header">
                             <div class="header-container">
                                 <a href="#" class="brand">
-                                    <div class="brand-logo">
-                                        <i class="fas fa-shield-alt"></i>
-                                    </div>
                                     <span class="brand-text">KULAPOR</span>
                                 </a>
                                 <a href="homepage.php" class="btn-back">

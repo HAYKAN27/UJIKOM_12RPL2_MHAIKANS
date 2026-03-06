@@ -45,9 +45,10 @@ body {
 .close a{
     backdrop-filter: blur(6px);
     color: white;
-    font-weight: 800;
+    font-weight: 500;
+    font-family: 'Times New Roman', Times, serif;
     padding: 10px 10px 5px ;
-    border: 2px solid gray;
+
     border-radius: 4px;
 }
 

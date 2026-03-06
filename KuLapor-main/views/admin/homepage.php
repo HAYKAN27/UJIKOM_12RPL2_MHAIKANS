@@ -5,7 +5,9 @@ include '../../config/koneksi.php';
 if (!isset($_SESSION['role']) || $_SESSION['role'] != 'admin') {
     header("Location: ../../login_admin.php");
     exit;
-}
+    }
+    
+    $username = $_SESSION['username'];
 
 $data_aspirasi = mysqli_query($koneksi,"
 SELECT * FROM `input_aspirasi`
@@ -26,7 +28,6 @@ SELECT * FROM `user` WHERE role = 'siswa'
 $total_pengguna = mysqli_num_rows($data_pengguna);
 
 
-$username = $_SESSION['username'];
 
 ?>
 
@@ -365,7 +366,6 @@ $username = $_SESSION['username'];
     <header class="header">
         <div class="header-container">
             <div class="header-left">
-                <a href="" class="brand">
                     <span class="brand-text">KULAPOR</span>
                 </a>
             </div>
