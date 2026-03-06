@@ -18,7 +18,7 @@ include '../config/koneksi.php';
     if ($password_lama != $data['password']) {
         echo "<script>
                 alert('Password lama salah!');
-                window.location='ubah_password.php';
+                window.location='../views/siswa/form_ganti_password.php';
               </script>";
         exit();
     }
@@ -27,7 +27,7 @@ include '../config/koneksi.php';
     if ($password_baru != $konfirmasi) {
         echo "<script>
                 alert('Konfirmasi password tidak cocok!');
-                window.location='ubah_password.php';
+                window.location='../views/siswa/form_ganti_password.php';
               </script>";
         exit();
     }

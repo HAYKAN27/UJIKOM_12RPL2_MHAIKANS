@@ -638,9 +638,6 @@
                         <header class="header">
                             <div class="header-container">
                                 <a href="#" class="brand">
-                                    <div class="brand-logo">
-                                        <i class="fas fa-shield-alt"></i>
-                                    </div>
                                     <span class="brand-text">KULAPOR</span>
                                 </a>
                                 <a href="homepage.php" class="btn-back">
@@ -698,7 +695,7 @@
                                                     <td><?= $data['kelas']; ?></td>
                                                     <td><?= $data['role']; ?></td>
                                                     <td>
-                                                        <a href="?hapus=<?= $data['nis']; ?>" class="btn-action btn-respond"
+                                                        <a href="?hapus=<?= $data['nis']; ?>" class="btn-action btn-danger"
                                                             onclick="return confirm('Yakin hapus data?')">
                                                             <i class="fas fa-trash"></i> Hapus
                                                         </a>

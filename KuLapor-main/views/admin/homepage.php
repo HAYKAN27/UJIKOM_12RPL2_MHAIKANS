@@ -1,12 +1,34 @@
 <?php
 session_start();
+include '../../config/koneksi.php';
 
 if (!isset($_SESSION['role']) || $_SESSION['role'] != 'admin') {
     header("Location: ../../login_admin.php");
     exit;
-}
+    }
+    
+    $username = $_SESSION['username'];
 
-$username = $_SESSION['username'];
+$data_aspirasi = mysqli_query($koneksi,"
+SELECT * FROM `input_aspirasi`
+");
+
+$total_aspirasi = mysqli_num_rows($data_aspirasi);
+
+$data_kategori = mysqli_query($koneksi,"
+SELECT * FROM `kategori`
+");
+
+$total_kategori = mysqli_num_rows($data_kategori);
+
+$data_pengguna = mysqli_query($koneksi,"
+SELECT * FROM `user` WHERE role = 'siswa'
+");
+
+$total_pengguna = mysqli_num_rows($data_pengguna);
+
+
+
 ?>
 
 <!DOCTYPE html>
@@ -203,10 +225,18 @@ $username = $_SESSION['username'];
             text-decoration: underline;
         }
 
+
+        .statistik-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 24px;
+            margin-bottom: 32px;
+        }
+
         /* Dashboard Grid */
         .dashboard-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            /* grid-template-columns: repeat(minmax(1fr)); */
             gap: 24px;
             margin-bottom: 32px;
         }
@@ -336,7 +366,6 @@ $username = $_SESSION['username'];
     <header class="header">
         <div class="header-container">
             <div class="header-left">
-                <a href="" class="brand">
                     <span class="brand-text">KULAPOR</span>
                 </a>
             </div>
@@ -370,6 +399,47 @@ $username = $_SESSION['username'];
             <h1 class="page-title">Dashboard Administrator</h1>
             <p class="page-subtitle">Kelola sistem pengaduan dan data siswa secara terpusat</p>
         </div>
+
+
+        <!-- statistik card -->
+        <div class="statistik-grid">
+            <div class="menu-card">
+                    <div class="menu-header">
+                        <div class="menu-icon-wrapper">
+                            <i class="fas fa-clipboard-list menu-icon"></i>
+                        </div>
+                    </div>
+                    <div class="menu-content">
+                        <h2><?= $total_aspirasi ?></h2>
+                        <p class="menu-description">JUMLAH ASPIRASI</p>
+                    </div>
+                </div>
+            <div class="menu-card">
+                    <div class="menu-header">
+                        <div class="menu-icon-wrapper">
+                        <i class="fas fa-folder-open menu-icon"></i>
+                        </div>
+                    </div>
+                    <div class="menu-content">
+                        <h2><?= $total_kategori ?></h2>
+                        <p class="menu-description">JUMLAH KATEGORI</p>
+                    </div>
+                </div>
+            <div class="menu-card">
+                    <div class="menu-header">
+                        <div class="menu-icon-wrapper">
+                        <i class="fas fa-users menu-icon"></i>
+                        </div>
+                    </div>
+                    <div class="menu-content">
+                        <h2><?= $total_pengguna ?></h2>
+                        <p class="menu-description">JUMLAH PENGGUNA</p>
+                    </div>
+                </div>
+
+        </div>
+
+
         <!-- Menu Cards -->
         <div class="dashboard-grid">
             <!-- Card 1 -->

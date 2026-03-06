@@ -1,11 +1,21 @@
 <?php
 session_start();
+include '../../config/koneksi.php';
 
 
-            if (!isset($_SESSION['role']) || $_SESSION['role'] != 'admin') {
-                header("Location: ../../login_admin.php");
-                exit;
-            }
+if (!isset($_SESSION['role']) || $_SESSION['role'] != 'admin') {
+    header("Location: ../../login_admin.php");
+    exit;
+}
+// PROSES DELETE
+if (isset($_GET['hapus'])) {
+
+    $id = $_GET['hapus'];
+
+    mysqli_query($koneksi, "DELETE FROM input_aspirasi WHERE id_pelapor='$id'");
+    header("Location: data_pengaduan.php");
+    exit();
+}
 ?>
 
 <!DOCTYPE html>
@@ -15,16 +25,16 @@ session_start();
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Data Pengaduan - KULAPOR</title>
-    
+
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;600;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
-    
+
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
+
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
-    
+
     <!-- jQuery -->
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 
@@ -238,6 +248,7 @@ session_start();
             justify-content: center;
             font-size: 16px;
         }
+
         .stat-value {
             font-family: 'Roboto', sans-serif;
             font-size: 28px;
@@ -419,7 +430,7 @@ session_start();
             color: #065F46;
         }
 
-        .status-ditolak{
+        .status-ditolak {
             background: #ff4b4b;
             color: #000000;
         }
@@ -593,10 +604,13 @@ session_start();
                     "infoFiltered": "(difilter dari _MAX_ total data)"
                 },
                 "pageLength": 10,
-                "order": [[0, 'asc']],
-                "columnDefs": [
-                    { "orderable": false, "targets": 5 }
-                ]
+                "order": [
+                    [0, 'asc']
+                ],
+                "columnDefs": [{
+                    "orderable": false,
+                    "targets": 5
+                }]
             });
         });
     </script>
@@ -607,9 +621,6 @@ session_start();
     <header class="header">
         <div class="header-container">
             <a href="#" class="brand">
-                <div class="brand-logo">
-                    <i class="fas fa-shield-alt"></i>
-                </div>
                 <span class="brand-text">KULAPOR</span>
             </a>
             <a href="homepage.php" class="btn-back">
@@ -639,7 +650,7 @@ session_start();
 
         <div class="table-container">
             <div class="table-header">
-                <h2 class="table-title">Daftar Pengaduan    </h2>
+                <h2 class="table-title">Daftar Pengaduan </h2>
             </div>
             <div class="table-wrapper">
                 <table id="datatable" class="display">
@@ -656,75 +667,77 @@ session_start();
                             <th>Aksi</th>
                         </tr>
                     </thead>
-<tbody>
-    <?php
-    include '../../ControllerAdmin/data_pengaduan.php';
+                    <tbody>
+                        <?php
+                        include '../../ControllerAdmin/data_pengaduan.php';
 
-    $no = 1;
+                        $no = 1;
 
-    if ($data && mysqli_num_rows($data) > 0) {
+                        if ($data && mysqli_num_rows($data) > 0) {
 
-        while ($row = mysqli_fetch_assoc($data)) {
+                            while ($row = mysqli_fetch_assoc($data)) {
 
-            $status = strtolower($row['status']);
-            $status_class = 'status-pending';
-            $status_icon  = 'fa-clock';
+                                $status = strtolower($row['status']);
+                                $status_class = 'status-pending';
+                                $status_icon  = 'fa-clock';
 
-            if ($status == 'proses') {
-                $status_class = 'status-proses';
-                $status_icon  = 'fa-spinner';
-                
-            } elseif ($status == 'selesai') {
-                $status_class = 'status-selesai';
-                $status_icon  = 'fa-check';
-            }elseif ($status == 'ditolak') {
-                $status_class = 'status-ditolak';
-                $status_icon  = 'fa-times';
-            }
-    ?>
-        <tr>
-            <td><strong><?= $no; ?></strong></td>
-            <td><strong><?= $row['username']; ?></strong></td>
-            <td><?= $row['kelas']; ?></td>
-            <td><?= $row['ket_kategori']; ?></td>
-            <td><?= $row['tanggal']; ?></td>
+                                if ($status == 'proses') {
+                                    $status_class = 'status-proses';
+                                    $status_icon  = 'fa-spinner';
+                                } elseif ($status == 'selesai') {
+                                    $status_class = 'status-selesai';
+                                    $status_icon  = 'fa-check';
+                                } elseif ($status == 'ditolak') {
+                                    $status_class = 'status-ditolak';
+                                    $status_icon  = 'fa-times';
+                                }
+                        ?>
+                                <tr>
+                                    <td><strong><?= $no; ?></strong></td>
+                                    <td><strong><?= $row['username']; ?></strong></td>
+                                    <td><?= $row['kelas']; ?></td>
+                                    <td><?= $row['ket_kategori']; ?></td>
+                                    <td><?= $row['tanggal']; ?></td>
 
-            <td>
-                <span class="status-badge <?= $status_class; ?>">
-                    <i class="fas <?= $status_icon; ?>"></i>
-                    <?= ucfirst($row['status']); ?>
-                </span>
-            </td>
+                                    <td>
+                                        <span class="status-badge <?= $status_class; ?>">
+                                            <i class="fas <?= $status_icon; ?>"></i>
+                                            <?= ucfirst($row['status']); ?>
+                                        </span>
+                                    </td>
 
-            <td>
-                <button 
-                    onclick="window.location.href='detail_pengaduan.php?id=<?= $row['id_pelapor']; ?>'" 
-                    class="btn-action btn-detail">
-                    <i class="fas fa-eye"></i> Detail
-                </button>
+                                    <td>
+                                        <button
+                                            onclick="window.location.href='detail_pengaduan.php?id=<?= $row['id_pelapor']; ?>'"
+                                            class="btn-action btn-detail">
+                                            <i class="fas fa-eye"></i> Detail
+                                        </button>
 
-                <a href="feedback_pengaduan.php?id=<?= $row['id_pelapor']; ?>" class="btn-action btn-respond">
-                    <i class="fas fa-reply"></i> Tanggapi
-                </a>
-            </td>
-        </tr>
-    <?php
-        $no++;
-    }
-
-} else {
-?>
-    <tr>
-        <td colspan="6">
-            <div class="empty-state">
-                <i class="fas fa-inbox"></i>
-                <h3>Belum Ada Pengaduan</h3>
-                <p>Belum ada data pengaduan</p>
-            </div>
-        </td>
-    </tr>
-<?php } ?>
-</tbody>
+                                        <a href="feedback_pengaduan.php?id=<?= $row['id_pelapor']; ?>" class="btn-action btn-respond">
+                                            <i class="fas fa-reply"></i> Tanggapi
+                                        </a>
+                                        <a href="?hapus=<?= $row['id_pelapor']; ?>" class="btn-action btn-danger    "
+                                        onclick="return confirm('Yakin hapus data?')">
+                                        <i class="fas fa-trash"></i> Hapus
+                                        </a>
+                                    </td>
+                                </tr>
+                            <?php
+                                $no++;
+                            }
+                        } else {
+                            ?>
+                            <tr>
+                                <td colspan="6">
+                                    <div class="empty-state">
+                                        <i class="fas fa-inbox"></i>
+                                        <h3>Belum Ada Pengaduan</h3>
+                                        <p>Belum ada data pengaduan</p>
+                                    </div>
+                                </td>
+                            </tr>
+                        <?php } ?>
+                    </tbody>
                 </table>
             </div>
         </div>
