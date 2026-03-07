@@ -670,16 +670,12 @@ if (isset($_GET['hapus'])) {
                     <tbody>
                         <?php
                         include '../../ControllerAdmin/data_pengaduan.php';
-
                         $no = 1;
 
                         if ($data && mysqli_num_rows($data) > 0) {
-
                             while ($row = mysqli_fetch_assoc($data)) {
 
                                 $status = strtolower($row['status']);
-                                $status_class = 'status-pending';
-                                $status_icon  = 'fa-clock';
 
                                 if ($status == 'proses') {
                                     $status_class = 'status-proses';
@@ -690,6 +686,9 @@ if (isset($_GET['hapus'])) {
                                 } elseif ($status == 'ditolak') {
                                     $status_class = 'status-ditolak';
                                     $status_icon  = 'fa-times';
+                                } else {
+                                    $status_class = 'status-pending';
+                                    $status_icon  = 'fa-clock';
                                 }
                         ?>
                                 <tr>
@@ -716,27 +715,20 @@ if (isset($_GET['hapus'])) {
                                         <a href="feedback_pengaduan.php?id=<?= $row['id_pelapor']; ?>" class="btn-action btn-respond">
                                             <i class="fas fa-reply"></i> Tanggapi
                                         </a>
-                                        <a href="?hapus=<?= $row['id_pelapor']; ?>" class="btn-action btn-danger    "
-                                        onclick="return confirm('Yakin hapus data?')">
-                                        <i class="fas fa-trash"></i> Hapus
+
+                                        <a href="?hapus=<?= $row['id_pelapor']; ?>"
+                                            class="btn-action btn-danger"
+                                            onclick="return confirm('Yakin hapus data?')">
+                                            <i class="fas fa-trash"></i> Hapus
                                         </a>
                                     </td>
                                 </tr>
+
                             <?php
                                 $no++;
                             }
-                        } else {
+                        } 
                             ?>
-                            <tr>
-                                <td colspan="6">
-                                    <div class="empty-state">
-                                        <i class="fas fa-inbox"></i>
-                                        <h3>Belum Ada Pengaduan</h3>
-                                        <p>Belum ada data pengaduan</p>
-                                    </div>
-                                </td>
-                            </tr>
-                        <?php } ?>
                     </tbody>
                 </table>
             </div>

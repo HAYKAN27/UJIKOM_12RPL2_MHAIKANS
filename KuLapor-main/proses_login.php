@@ -51,18 +51,17 @@ if (!$data) {
     exit;
 }
 
-// Kalau password yang diketik tidak sama dengan yang di database
-if ($data['password'] != $password) {
+// Cek apakah password yang diketik cocok dengan password hash di database
+if (!password_verify($password, $data['password'])) {
     echo "<script>
             alert('Password salah');
             window.history.back();
           </script>";
-    // Kasih tahu password salah lalu balik lagi
     exit;
 }
 
 // Kalau semuanya benar (user ada dan password cocok)
-if ($data) {
+if ($data) {    
 
     // Simpan data penting ke session supaya dianggap sudah login
     $_SESSION['id']       = $data['id'];        

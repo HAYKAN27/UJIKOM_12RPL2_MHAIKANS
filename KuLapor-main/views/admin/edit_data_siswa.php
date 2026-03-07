@@ -19,8 +19,9 @@ if (isset($_POST['update'])) {
     $nama = $_POST['nama'];
     $kelas = $_POST['kelas'];
     $password = $_POST['password'];
+    $password_hash = password_hash($password,PASSWORD_DEFAULT);
 
-    // 🔴 validasi tidak boleh kosong
+    // validasi tidak boleh kosong
     if ($nis == "" || $nama == "" || $kelas == "") {
 
         echo "<script>
@@ -38,7 +39,7 @@ if (isset($_POST['update'])) {
                 SET nis='$nis',
                     Username='$nama',
                     kelas='$kelas',
-                    password='$password'
+                    password='$password_hash'
                 WHERE id='$id'
             ");
 
@@ -291,7 +292,6 @@ if (isset($_POST['update'])) {
                     <input 
                         type="password" 
                         name="password" 
-                        value="<?= $data['password']; ?>"
                         class="form-control" 
                         placeholder="Kosongkan jika tidak ingin mengubah"
                     >

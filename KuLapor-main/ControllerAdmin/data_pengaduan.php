@@ -9,7 +9,7 @@ $data = mysqli_query($koneksi, "
         user.kelas,
         kategori.ket_kategori
     FROM input_aspirasi
-    JOIN user ON input_aspirasi.nis = user.nis
+    LEFT JOIN user ON input_aspirasi.nis = user.nis
     JOIN kategori ON input_aspirasi.id_kategori = kategori.id_kategori
 
 ");

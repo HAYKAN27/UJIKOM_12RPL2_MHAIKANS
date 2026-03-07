@@ -172,19 +172,6 @@
         </div>
         <div class="card-body">
             <form method="POST" action="../../ControllerAdmin/proses_ganti_password.php">
-                <!-- Password Lama -->
-                <div class="form-group">
-                    <label class="form-label">
-                        Password Lama <span class="required">*</span>
-                    </label>
-                    <input
-                        type="password"
-                        name="password_lama"
-                        class="form-control"
-                        placeholder="Masukkan password lama"
-                        required>
-                </div>
-
                 <!-- Password Baru -->
                 <div class="form-group">
                     <label class="form-label">
