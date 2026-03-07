@@ -436,8 +436,9 @@ $total_pengguna = mysqli_num_rows($data_pengguna);
                         <p class="menu-description">JUMLAH PENGGUNA</p>
                     </div>
                 </div>
-
+        
         </div>
+        <hr style="margin:30px 0px 30px 0px;">
 
 
         <!-- Menu Cards -->
