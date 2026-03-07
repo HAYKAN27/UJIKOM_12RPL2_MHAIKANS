@@ -5,23 +5,23 @@ include '../../config/koneksi.php';
 if (!isset($_SESSION['role']) || $_SESSION['role'] != 'admin') {
     header("Location: ../../login_admin.php");
     exit;
-    }
-    
-    $username = $_SESSION['username'];
+}
 
-$data_aspirasi = mysqli_query($koneksi,"
+$username = $_SESSION['username'];
+
+$data_aspirasi = mysqli_query($koneksi, "
 SELECT * FROM `input_aspirasi`
 ");
 
 $total_aspirasi = mysqli_num_rows($data_aspirasi);
 
-$data_kategori = mysqli_query($koneksi,"
+$data_kategori = mysqli_query($koneksi, "
 SELECT * FROM `kategori`
 ");
 
 $total_kategori = mysqli_num_rows($data_kategori);
 
-$data_pengguna = mysqli_query($koneksi,"
+$data_pengguna = mysqli_query($koneksi, "
 SELECT * FROM `user` WHERE role = 'siswa'
 ");
 
@@ -33,6 +33,7 @@ $total_pengguna = mysqli_num_rows($data_pengguna);
 
 <!DOCTYPE html>
 <html lang="id">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -361,12 +362,13 @@ $total_pengguna = mysqli_num_rows($data_pengguna);
         }
     </style>
 </head>
+
 <body>
     <!-- Header -->
     <header class="header">
         <div class="header-container">
             <div class="header-left">
-                    <span class="brand-text">KULAPOR</span>
+                <span class="brand-text">KULAPOR</span>
                 </a>
             </div>
             <div class="header-right">
@@ -374,7 +376,7 @@ $total_pengguna = mysqli_num_rows($data_pengguna);
                     <img src="https://secure.gravatar.com/avatar/d194c6c98a5041637d4006baddfa05cb?s=128&d=mm&r=g" alt="Admin Avatar" class="user-avatar">
                     <div class="user-details">
                         <div class="user-role">Administrator</div>
-                        <div class="user-name"><?= $username?></div>
+                        <div class="user-name"><?= $username ?></div>
                     </div>
                 </div>
                 <button class="btn-logout">
@@ -388,7 +390,7 @@ $total_pengguna = mysqli_num_rows($data_pengguna);
     <!-- Main Content -->
     <main class="main-wrapper">
         <!-- Breadcrumb -->
-        <div class="breadcrumb">    
+        <div class="breadcrumb">
             <a href="#">Beranda</a>
             <span>/</span>
             <span>Dashboard</span>
@@ -404,39 +406,38 @@ $total_pengguna = mysqli_num_rows($data_pengguna);
         <!-- statistik card -->
         <div class="statistik-grid">
             <div class="menu-card">
-                    <div class="menu-header">
-                        <div class="menu-icon-wrapper">
-                            <i class="fas fa-clipboard-list menu-icon"></i>
-                        </div>
-                    </div>
-                    <div class="menu-content">
-                        <h2><?= $total_aspirasi ?></h2>
-                        <p class="menu-description">JUMLAH ASPIRASI</p>
+                <div class="menu-header">
+                    <div class="menu-icon-wrapper">
+                        <i class="fas fa-clipboard-list menu-icon"></i>
                     </div>
                 </div>
+                <div class="menu-content">
+                    <h2><?= $total_aspirasi ?></h2>
+                    <p class="menu-description">JUMLAH ASPIRASI</p>
+                </div>
+            </div>
             <div class="menu-card">
-                    <div class="menu-header">
-                        <div class="menu-icon-wrapper">
+                <div class="menu-header">
+                    <div class="menu-icon-wrapper">
                         <i class="fas fa-folder-open menu-icon"></i>
-                        </div>
-                    </div>
-                    <div class="menu-content">
-                        <h2><?= $total_kategori ?></h2>
-                        <p class="menu-description">JUMLAH KATEGORI</p>
                     </div>
                 </div>
+                <div class="menu-content">
+                    <h2><?= $total_kategori ?></h2>
+                    <p class="menu-description">JUMLAH KATEGORI</p>
+                </div>
+            </div>
             <div class="menu-card">
-                    <div class="menu-header">
-                        <div class="menu-icon-wrapper">
+                <div class="menu-header">
+                    <div class="menu-icon-wrapper">
                         <i class="fas fa-users menu-icon"></i>
-                        </div>
-                    </div>
-                    <div class="menu-content">
-                        <h2><?= $total_pengguna ?></h2>
-                        <p class="menu-description">JUMLAH PENGGUNA</p>
                     </div>
                 </div>
-        
+                <div class="menu-content">
+                    <h2><?= $total_pengguna ?></h2>
+                    <p class="menu-description">JUMLAH PENGGUNA</p>
+                </div>
+            </div>
         </div>
         <hr style="margin:30px 0px 30px 0px;">
 
@@ -444,23 +445,6 @@ $total_pengguna = mysqli_num_rows($data_pengguna);
         <!-- Menu Cards -->
         <div class="dashboard-grid">
             <!-- Card 1 -->
-            <div class="menu-card">
-                <div class="menu-header">
-                    <div class="menu-icon-wrapper">
-                        <i class="fas fa-folder-open menu-icon"></i>
-                    </div>
-                    <span class="menu-badge">MANAJEMEN</span>
-                </div>
-                <div class="menu-content">
-                    <h3 class="menu-title">Manajemen Kategori</h3>
-                    <p class="menu-description">Kelola kategori pengaduan, tambah, edit, atau hapus kategori sesuai kebutuhan sistem.</p>
-                    <a href="data_kategori.php" class="menu-link">
-                        Akses Menu <i class="fas fa-arrow-right"></i>
-                    </a>
-                </div>
-            </div>
-
-            <!-- Card 2 -->
             <div class="menu-card">
                 <div class="menu-header">
                     <div class="menu-icon-wrapper">
@@ -477,7 +461,7 @@ $total_pengguna = mysqli_num_rows($data_pengguna);
                 </div>
             </div>
 
-            <!-- Card 3 -->
+            <!-- Card 2 -->
             <div class="menu-card">
                 <div class="menu-header">
                     <div class="menu-icon-wrapper">
@@ -489,6 +473,24 @@ $total_pengguna = mysqli_num_rows($data_pengguna);
                     <h3 class="menu-title">Manajemen Data Siswa</h3>
                     <p class="menu-description">Kelola database siswa terdaftar, update informasi, dan monitor aktivitas pengguna.</p>
                     <a href="data_siswa.php" class="menu-link">
+                        Akses Menu <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
+            </div>
+
+
+            <!-- Card 3 -->
+            <div class="menu-card">
+                <div class="menu-header">
+                    <div class="menu-icon-wrapper">
+                        <i class="fas fa-folder-open menu-icon"></i>
+                    </div>
+                    <span class="menu-badge">MANAJEMEN</span>
+                </div>
+                <div class="menu-content">
+                    <h3 class="menu-title">Manajemen Kategori</h3>
+                    <p class="menu-description">Kelola kategori pengaduan, tambah, edit, atau hapus kategori sesuai kebutuhan sistem.</p>
+                    <a href="data_kategori.php" class="menu-link">
                         Akses Menu <i class="fas fa-arrow-right"></i>
                     </a>
                 </div>
@@ -529,4 +531,5 @@ $total_pengguna = mysqli_num_rows($data_pengguna);
         </div>
     </main>
 </body>
+
 </html>

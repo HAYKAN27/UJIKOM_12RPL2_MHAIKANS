@@ -4,8 +4,8 @@ include '../config/koneksi.php';
 
 
     $nis = $_SESSION['nis'];
-    $password_lama = $_POST['password_lama'];
     $password_baru = $_POST['password_baru'];
+    $password_hash = password_hash($password_baru,PASSWORD_DEFAULT);
     $konfirmasi = $_POST['konfirmasi_password'];
 
     // Ambil data user
@@ -13,15 +13,6 @@ include '../config/koneksi.php';
         "SELECT * FROM user WHERE nis='$nis'"
     );
     $data = mysqli_fetch_assoc($query);
-
-    // Cek password lama
-    if ($password_lama != $data['password']) {
-        echo "<script>
-                alert('Password lama salah!');
-                window.location='../views/siswa/form_ganti_password.php';
-              </script>";
-        exit();
-    }
 
     // Cek konfirmasi password
     if ($password_baru != $konfirmasi) {
@@ -34,7 +25,7 @@ include '../config/koneksi.php';
 
     // Update password
     $update = mysqli_query($koneksi, 
-        "UPDATE user SET password='$password_baru' WHERE nis='$nis'"
+        "UPDATE user SET password='$password_hash' WHERE nis='$nis'"
     );
 
     if ($update) {
