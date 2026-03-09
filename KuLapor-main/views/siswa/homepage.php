@@ -384,16 +384,22 @@ $nama = $_SESSION['username'];
             <div class="carousel-indicators">
                 <button type="button" data-bs-target="#carouselKuLapor" data-bs-slide-to="0" class="active"></button>
                 <button type="button" data-bs-target="#carouselKuLapor" data-bs-slide-to="1"></button>
+                <button type="button" data-bs-target="#carouselKuLapor" data-bs-slide-to="2"></button>
             </div>
 
             <div class="carousel-inner rounded shadow">
 
+                
                 <div class="carousel-item active">
-                    <img src="../../public/img/SMKMUTU (1).jpeg" class="d-block w-100" style="height:350px; object-fit:cover;">
+                    <img src="../../public/img/SMKMUTU2 (1).jpg" class="d-block w-100" style="height:350px; object-fit:cover;">
                 </div>
 
                 <div class="carousel-item">
-                    <img src="../../public/img/SMKMUTU2 (1).jpg" class="d-block w-100" style="height:350px; object-fit:cover;">
+                    <img src="../../public/img/MUTU.jpg" class="d-block w-100" style="height:350px; object-fit:cover;">
+                </div>
+
+                <div class="carousel-item">
+                    <img src="../../public/img/MUTU2.png" class="d-block w-100" style="height:350px; object-fit:cover;">
                 </div>
             </div>
 
