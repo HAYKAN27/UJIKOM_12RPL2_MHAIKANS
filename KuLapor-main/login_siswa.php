@@ -4,6 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>KuLapor - LoginPage</title>
+        <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
+
     <style>
         * {
             margin: 0;
@@ -145,6 +150,7 @@
             <input type="hidden" name="tipe_login" value="siswa">
             
             <div class="university-name">KuLapor - Siswa</div>
+            
             
             <div class="input-group">
                 <label for="nis">NIS(Nomor Induk Siswa) :</label>
