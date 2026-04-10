@@ -294,6 +294,7 @@ if (isset($_POST['update'])) {
                         name="password" 
                         class="form-control" 
                         placeholder="Kosongkan jika tidak ingin mengubah"
+                        required
                     >
                 </div>
 

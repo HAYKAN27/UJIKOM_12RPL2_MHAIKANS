@@ -10,7 +10,7 @@ include '../config/koneksi.php';
 
     // Ambil data user
     $query = mysqli_query($koneksi, 
-        "SELECT * FROM user WHERE id='$id'"
+        "SELECT * FROM user WHERE id='$id' "
     );
     $data = mysqli_fetch_assoc($query);
 
